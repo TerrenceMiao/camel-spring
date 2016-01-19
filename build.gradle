@@ -28,10 +28,28 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter')
-	testCompile('org.springframework.boot:spring-boot-starter-test') 
+	// Spring Boot
+	compile("org.springframework.boot:spring-boot-starter:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+
+    // dependencies error:
+    // 'dependencies.dependency.systemPath' for com.sun:tools:jar must specify an absolute path but is
+    // /home/tclement/plf-release-tools/tools/jdk1.7.0_67/jre/../lib/tools.jar in org.crashub:crash.shell:1.3.2
+//	compile("org.springframework.boot:spring-boot-starter-remote-shell:${springBootVersion}")
+//    compile files("${System.properties['java.home']}/../lib/tools.jar")
+//    compile(files(((URLClassLoader) ToolProvider.getSystemToolClassLoader()).getURLs()))
+
+	// Apache Camel
+	compile("org.apache.camel:camel-spring-boot:${camelVersion}")
+    // Failed to find this dependency
+//	compile("org.apache.camel:camel-commands-spring-boot:${camelVersion}")
+
+	// Jolokia
+	compile("org.jolokia:jolokia-core:${jolokiaVersion}")
+
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
 task wrapper(type: Wrapper) {
