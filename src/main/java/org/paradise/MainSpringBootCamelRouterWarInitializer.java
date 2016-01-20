@@ -12,5 +12,5 @@ public class MainSpringBootCamelRouterWarInitializer extends FatWarInitializer {
 
         return MainSpringBootCamelRouter.class;
     }
-    
+
 }
