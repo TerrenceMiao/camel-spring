@@ -22,7 +22,7 @@ public class MainSpringBootCamelRouterTests {
 
 	@Test
 	public void shouldProduceMessages() throws InterruptedException {
-        
+
 		// we expect that one or more messages is automatic done by the Camel
 		// route as it uses a timer to trigger
 		NotifyBuilder notify = new NotifyBuilder(camelContext).whenDone(1).create();

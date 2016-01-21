@@ -14,11 +14,12 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'spring-boot' 
+apply plugin: 'war'
+apply plugin: 'spring-boot'
 
-jar {
-	baseName = 'camel'
-	version = '1.0-SNAPSHOT'
+war {
+    baseName = 'camel'
+    version = '1.0-SNAPSHOT'
 }
 
 sourceCompatibility = 1.8
@@ -48,6 +49,9 @@ dependencies {
 
 	// Jolokia
 	compile("org.jolokia:jolokia-core:${jolokiaVersion}")
+
+	// Hawtio for Spring Boot
+	compile "io.hawt:hawtio-springboot:${dependencyVersionHawtio}"
 
 	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
