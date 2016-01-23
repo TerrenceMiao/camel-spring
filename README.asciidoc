@@ -12,6 +12,12 @@ Prerequisites
 - JDK 1.8, _http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html_
 - Gradle latest version, _http://gradle.org_
 
+Reference
+---------
+- Start Spring Boot project with Spring Initializer, _https://start.spring.io/_
+- Enterprise Integration Patterns by Apache Camel, _http://camel.apache.org/enterprise-integration-patterns.html_
+- AsciiDoc Syntax Quick Reference, _http://asciidoctor.org/docs/asciidoc-syntax-quick-reference_
+
 Copying
 -------
 Copyright (C) 2016 - Terrence Miao. Free use of this software is granted under the terms of the GNU General Public License version 3 (GPLv3).
