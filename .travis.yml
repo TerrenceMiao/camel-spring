@@ -3,4 +3,4 @@ language:
 jdk:
   - oraclejdk8
 script:
-  - ./gradlew clean build
+  - ./gradlew --parallel --max-workers=2 clean build
