@@ -2,9 +2,7 @@
 Camel Spring
 ============
 image:https://travis-ci.org/TerrenceMiao/camel-spring.svg?branch=master["Build Status", link="https://travis-ci.org/TerrenceMiao/camel-spring"]
-image:https://coveralls.io/repos/github/TerrenceMiao/camel-spring/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/TerrenceMiao/camel-spring?branch=master"]
-image:https://codeclimate.com/github/TerrenceMiao/camel-spring/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/TerrenceMiao/camel-spring"]
-image:https://codeclimate.com/github/TerrenceMiao/camel-spring/badges/coverage.svg["Test Coverage", link="https://codeclimate.com/github/TerrenceMiao/camel-spring/coverage"]
+image:https://codecov.io/github/TerrenceMiao/camel-spring/coverage.svg?branch=master["Code Coverage", link="https://codecov.io/github/TerrenceMiao/camel-spring?branch=master"]
 image:https://codeclimate.com/github/TerrenceMiao/camel-spring/badges/issue_count.svg["Issue Count", link="https://codeclimate.com/github/TerrenceMiao/camel-spring"]
 
 When Camel meets Spring is a sample demonstrating how *Apache Camel* works with *Spring Boot*, with *hawtio* http://hawt.io/getstarted/,
