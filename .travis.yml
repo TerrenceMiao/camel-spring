@@ -6,3 +6,4 @@ script:
   - ./gradlew clean build
 after_success:
   - ./gradlew jacocoRootReport coveralls
+  - codecov
