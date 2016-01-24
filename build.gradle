@@ -16,6 +16,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'spring-boot'
+apply plugin: 'jacoco'
 
 war {
     baseName = 'camel'
@@ -27,6 +28,27 @@ targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+}
+
+jacoco {
+    toolVersion = "${dependencyVersionJacoco}"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+test {
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+        classDumpFile = file("$buildDir/jacoco/classpathdumps")
+    }
 }
 
 dependencies {
