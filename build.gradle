@@ -12,6 +12,10 @@ buildscript {
 	}
 }
 
+plugins {
+    id "com.github.kt3k.coveralls" version "2.6.0"
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'war'
@@ -32,14 +36,13 @@ repositories {
 
 jacoco {
     toolVersion = "${dependencyVersionJacoco}"
-    reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
 jacocoTestReport {
     reports {
-        xml.enabled false
         csv.enabled false
-        html.destination "${buildDir}/jacocoHtml"
+        xml.enabled true
+        html.enabled true
     }
 }
 

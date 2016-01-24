@@ -3,4 +3,6 @@ language:
 jdk:
   - oraclejdk8
 script:
-  - ./gradlew clean build jacocoTestReport
+  - ./gradlew clean build
+after_success:
+  - ./gradlew jacocoRootReport coveralls
