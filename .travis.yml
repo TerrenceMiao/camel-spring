@@ -2,8 +2,12 @@ language:
   java
 jdk:
   - oraclejdk8
+
+before_script:
+  - pip install --user codecov
 script:
   - ./gradlew clean build
+  
 after_success:
   - ./gradlew jacocoRootReport coveralls
   - codecov
