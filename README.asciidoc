@@ -14,6 +14,18 @@ Prerequisites
 - JDK 1.8, _http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html_
 - Gradle latest version, _http://gradle.org_
 
+Development
+-----------
+- Ready, Set, Go
+[source.console]
+----
+$ $GRADLE_HOME/bin/gradle clean build
+
+$ $GRADLE_HOME/bin/gradle bootRun
+
+$ $GRADLE_HOME/bin/gradle bootRun --debug-jvm
+----
+
 Reference
 ---------
 - Start Spring Boot project with Spring Initializer, _https://start.spring.io/_
