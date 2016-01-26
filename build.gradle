@@ -18,7 +18,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
 
 jar {
-    baseName = 'camel'
+    baseName = 'camel-spring'
     version = '1.0-SNAPSHOT'
 }
 
