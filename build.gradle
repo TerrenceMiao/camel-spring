@@ -14,11 +14,10 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'war'
 apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
 
-war {
+jar {
     baseName = 'camel'
     version = '1.0-SNAPSHOT'
 }
