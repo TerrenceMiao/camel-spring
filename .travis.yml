@@ -34,7 +34,7 @@ deploy:
     bucket: camelspring-codedeploy
     key: camel-spring-1.0-SNAPSHOT.zip
     bundle_type: zip
-    application: CamelSpringDemoApplication
+    application: MainSpringBootCamelRouter
     deployment_group: DevelopmentDemoFleet
     on: *2
     region: ap-southeast-2
