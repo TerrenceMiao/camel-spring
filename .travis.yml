@@ -15,6 +15,7 @@ after_success:
 install: echo "Installing Camel Spring ..."
 
 before_deploy:
+  - zip build/libs/camel-1.0-SNAPSHOT.zip build/libs/camel-1.0-SNAPSHOT.war
   - ls -al build/libs
 
 deploy:
@@ -31,8 +32,8 @@ deploy:
     access_key_id: AKIAJY6IDV4P7LQS2RVA
     secret_access_key: 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
     bucket: camelspring-codedeploy
-    key: camel-spring-1.0-SNAPSHOT.jar
-    bundle_type: jar
+    key: camel-spring-1.0-SNAPSHOT.zip
+    bundle_type: zip
     application: CamelSpringDemoApplication
     deployment_group: DevelopmentDemoFleet
     on: *2
