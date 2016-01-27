@@ -33,7 +33,7 @@ deploy:
     bucket: camelspring-codedeploy
     key: camel-spring.zip
     bundle_type: zip
-    application: org.paradise.MainSpringBootCamelRouter
+    application: camel-spring
     deployment_group: DevelopmentDemoFleet
     on: *2
     region: ap-southeast-2
