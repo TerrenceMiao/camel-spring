@@ -21,7 +21,7 @@ deploy:
   - provider: s3
     access_key_id: AKIAJY6IDV4P7LQS2RVA
     secret_access_key: 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
-    local_dir: build/libs
+    local_dir: build/distributions
     skip_cleanup: true
     on: &2
       repo: TerrenceMiao/camel-spring
