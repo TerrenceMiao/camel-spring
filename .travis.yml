@@ -35,3 +35,4 @@ deploy:
     application: CamelSpringDemoApplication
     deployment_group: DevelopmentDemoFleet
     on: *2
+    region: ap-southeast-2
