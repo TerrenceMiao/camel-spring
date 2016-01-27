@@ -49,6 +49,11 @@ test {
     }
 }
 
+task dist(type:Zip) {
+    // generate artefact zip file under build/distributions directory
+    from jar.outputs.files
+}
+
 dependencies {
 	// Spring Boot
 	compile("org.springframework.boot:spring-boot-starter:${springBootVersion}")

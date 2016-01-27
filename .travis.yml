@@ -6,7 +6,7 @@ jdk:
 before_script:
   - pip install --user codecov
 script:
-  - ./gradlew clean build
+  - ./gradlew clean build dist
 
 after_success:
   - ./gradlew jacocoTestReport
@@ -15,8 +15,7 @@ after_success:
 install: echo "Installing Camel Spring ..."
 
 before_deploy:
-#  - zip build/libs/camel-spring-1.0-SNAPSHOT.zip build/libs/camel-spring-1.0-SNAPSHOT.jar
-  - ls -al build/libs
+  - ls -al build/distributions
 
 deploy:
   - provider: s3
@@ -32,9 +31,9 @@ deploy:
     access_key_id: AKIAJY6IDV4P7LQS2RVA
     secret_access_key: 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
     bucket: camelspring-codedeploy
-    key: camel-spring-1.0-SNAPSHOT.jar
-    bundle_type: jar
-    application: MainSpringBootCamelRouter
+    key: camel-spring.zip
+    bundle_type: zip
+    application: org.paradise.MainSpringBootCamelRouter
     deployment_group: DevelopmentDemoFleet
     on: *2
     region: ap-southeast-2
