@@ -15,7 +15,7 @@ after_success:
 install: echo "Installing Camel Spring ..."
 
 before_deploy:
-  - zip build/libs/camel-1.0-SNAPSHOT.jar build/libs/camel-1.0-SNAPSHOT.war
+  - zip build/libs/camel-1.0-SNAPSHOT.zip build/libs/camel-1.0-SNAPSHOT.jar
   - ls -al build/libs
 
 deploy:
