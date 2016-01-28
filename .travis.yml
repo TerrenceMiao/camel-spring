@@ -19,8 +19,9 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: AKIAJY6IDV4P7LQS2RVA
-    secret_access_key: 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
+    access_key_id: AKIAJ5224YCV33VTPRGQ
+    secret_access_key: &1
+      secure: "s0gjGbx5p7MltkASi5oBIUemYLHmjsoE6RKyuzJzXKsb3lE2+/aPw0VNjcX/7KPNUTgsdMgcm1QsxErl44gVKjBJquImXECUn1JVxPtcLTxA9y1f0wgcDpX8+c7bf1H+cI9icgHMNR69FjCiDI93WZhYqmFPvo+FKMk/bhnvyYW+xbR4OTxVgCBmofSxzGOPNv+oSWSA7YMHrziPT7o2nlyEAmfzEAVFyEVtf3cSVEwt5idVm9Hm9j0Qq2u8UNGrv+zDfq10mG1C31whU40jMmnU3ApQKHb2gAIBrGnA8VlQvPsLztIyKhjIjVrX2C23h8g4F8g/Dm9tIu04IyMB74pxl5VvzsrljKMNBVdChV90pgVTqkS7wUBlsjilZHcDVgx6ZguXopHk2NEIo0upRn2jdWrK9Er0sZXnAuWzRgTnPdr4AarQ9dGmk07lYEB/cWAjyjTy3NnFRFIHp1hvh83LPRbqorCVx928aLwE+5I7dVLD5rltNpmrgaCy/CWSWPAfIedtT2qw1WX5EgamPg7CNUlgOv8l0iNPuwzgO34IiPnpKoQfjIvhpTWrFNU+C9KfJeyEdfk+IPfvYOvDz7FvcdVtsF7pVgB7ClYOxpU0ZQsXCtqK6AoZCUB5C1ZdqOcEkxMFlubxXMw9Re9ZsnxTKvaeWuiS4TNd9q9z0vo="
     local_dir: build/distributions
     skip_cleanup: true
     on: &2
@@ -28,8 +29,8 @@ deploy:
     bucket: camelspring-codedeploy
     region: ap-southeast-2
   - provider: codedeploy
-    access_key_id: AKIAJY6IDV4P7LQS2RVA
-    secret_access_key: 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
+    access_key_id: AKIAJ5224YCV33VTPRGQ
+    secret_access_key: *1
     bucket: camelspring-codedeploy
     key: camel-spring.zip
     bundle_type: zip
