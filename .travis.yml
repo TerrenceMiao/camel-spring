@@ -35,6 +35,6 @@ deploy:
     key: camel-spring.zip
     bundle_type: zip
     application: CamelSpringDemo
-    deployment_group: DevelopmentFleet
+    deployment_group: DeploymentFleet
     on: *2
     region: ap-southeast-2
