@@ -24,6 +24,12 @@ $ $GRADLE_HOME/bin/gradle clean build
 $ $GRADLE_HOME/bin/gradle bootRun
 
 $ $GRADLE_HOME/bin/gradle bootRun --debug-jvm
+
+$ SERVER_PORT=8081 $GRADLE_HOME/bin/gradle bootRun
+
+$ SPRING_PROFILES_ACTIVE=production $GRADLE_HOME/bin/gradle bootRun
+
+$ $JAVA_HOME/bin/java -jar build/distributions/camel-spring-1.0-SNAPSHOT.jar -Dserver.port=8091
 ----
 
 Reference
