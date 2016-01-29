@@ -39,6 +39,7 @@ References
 - AsciiDoc Syntax Quick Reference, _http://asciidoctor.org/docs/asciidoc-syntax-quick-reference_
 - Travis CI AWS CodeDeploy, _https://docs.travis-ci.com/user/deployment/codedeploy/_
 - Create an Application with AWS CodeDeploy, _http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-application.html_
+- AWS Free Tier Cloud Services, _https://aws.amazon.com/free_
 
 Copying
 -------
