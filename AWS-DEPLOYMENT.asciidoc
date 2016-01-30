@@ -8,7 +8,7 @@ Set up
 ------
 - Launch an EC2 instance with Key Pair and Tag Name
 - Create "CodeDeploy" group in IAM with S3 and CodeDeploy Full Access policies
-image::https://raw.githubusercontent.com/TerrenceMiao/camel-spring/master/doc/IAM%20-%20CodeDeploy%20group.png
+[image:https://raw.githubusercontent.com/TerrenceMiao/camel-spring/master/doc/IAM%20-%20CodeDeploy%20group.png]
 - Create "CodeDeploy" user in IAM who is in "CodeDeploy" group
 - Create "CodeDeploy" service role in IAM with S3 and CodeDeploy Full Access policies
 - Create new applcation in CodeDeploy
