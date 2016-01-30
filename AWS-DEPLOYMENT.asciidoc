@@ -1,0 +1,15 @@
+AWS Deployment
+==============
+
+Choose Amazon https://aws.amazon.com/ec2/[EC2] and http://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html[CodeDeploy] have been chosen
+as application deployed and run in cloud solution. And https://travis-ci.org/[Travis CI] is used as Continuous Integration and Delivery platform.
+
+Set up
+------
+- Launch an EC2 instance with Key Pair and Tag Name
+- Create "CodeDeploy" group in IAM with S3 and CodeDeploy Full Access policies
+- Create "CodeDeploy" user in IAM who is in "CodeDeploy" group
+- Create "CodeDeploy" service role in IAM with S3 and CodeDeploy Full Access policies
+- Create new applcation in CodeDeploy
+- Create artefact bucket in S3
+
