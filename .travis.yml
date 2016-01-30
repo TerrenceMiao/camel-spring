@@ -19,9 +19,9 @@ before_deploy:
 
 deploy:
   - provider: s3
-    access_key_id: AKIAJ5224YCV33VTPRGQ
+    access_key_id: AKIAJUTWO2HAPKEESKUA
     secret_access_key: &1
-      secure: "s0gjGbx5p7MltkASi5oBIUemYLHmjsoE6RKyuzJzXKsb3lE2+/aPw0VNjcX/7KPNUTgsdMgcm1QsxErl44gVKjBJquImXECUn1JVxPtcLTxA9y1f0wgcDpX8+c7bf1H+cI9icgHMNR69FjCiDI93WZhYqmFPvo+FKMk/bhnvyYW+xbR4OTxVgCBmofSxzGOPNv+oSWSA7YMHrziPT7o2nlyEAmfzEAVFyEVtf3cSVEwt5idVm9Hm9j0Qq2u8UNGrv+zDfq10mG1C31whU40jMmnU3ApQKHb2gAIBrGnA8VlQvPsLztIyKhjIjVrX2C23h8g4F8g/Dm9tIu04IyMB74pxl5VvzsrljKMNBVdChV90pgVTqkS7wUBlsjilZHcDVgx6ZguXopHk2NEIo0upRn2jdWrK9Er0sZXnAuWzRgTnPdr4AarQ9dGmk07lYEB/cWAjyjTy3NnFRFIHp1hvh83LPRbqorCVx928aLwE+5I7dVLD5rltNpmrgaCy/CWSWPAfIedtT2qw1WX5EgamPg7CNUlgOv8l0iNPuwzgO34IiPnpKoQfjIvhpTWrFNU+C9KfJeyEdfk+IPfvYOvDz7FvcdVtsF7pVgB7ClYOxpU0ZQsXCtqK6AoZCUB5C1ZdqOcEkxMFlubxXMw9Re9ZsnxTKvaeWuiS4TNd9q9z0vo="
+      secure: "fcJNGG4468XYAC5de3RVwUghpVr6Mx/hEeBENqZp/85Od3U7RBLIrEDvE1uX5vwyc6PsT5SUCENmCDQjBbWiYS+uxuxwSDJF8pkcAGWOewxpROzaF+lmlZX7TmbsVRBHrNw387cWJTz+AanxekALMl9+LAqtKFsOI7GqQVdxR4+QGsP3KaAweVRGHDMx5fOVPfAbNBCo7pTRQyle0dDz6DSq05CxaPYRXsBLBm1x14TEO6OQFQtWXxKEjz53zEzhlR8NzKL0zTDOk6JhMer1T0Gys+RenfeROayUjO3ilh1xd6r0/uAQwQMwRpFGs4F6x5R4qJJ2zpnr3KewvmzSHHYBuaSkHGf9vMXeO44gDO/e7FqqO2PMnIMhMpZmIjv0/Q9C9snttPAF5Vab3uL2hr0JgPkxZ6aQ9TFCjuUir7lEec2DdBipK603MKE3VF8YtcS5DLiHMSKJaWU6HrDLn29URgyRsbeu43zJYdHLRgXAXW+B/wcSodzp1/2vKBfBLYXSxkUuK/vIYpOjS341cbQRDiE9w8sfKgyyu+o2ZJkfSnceaCv5JRdPGrgvD6Wy9udbaJtUrRCDF+iCCWwbFkrAZfjzfWACX9V3CwhrtLXIZlaGgzDGzkawD8F7U1BbykGqYYo4mTL3S8RclcUoK4vNyBNF3T2xcp+HUpZeJns="
     local_dir: build/distributions
     skip_cleanup: true
     on: &2
@@ -29,7 +29,7 @@ deploy:
     bucket: camelspring-codedeploy
     region: ap-southeast-2
   - provider: codedeploy
-    access_key_id: AKIAJ5224YCV33VTPRGQ
+    access_key_id: AKIAJUTWO2HAPKEESKUA
     secret_access_key: *1
     bucket: camelspring-codedeploy
     key: camel-spring.zip
