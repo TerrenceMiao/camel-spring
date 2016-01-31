@@ -52,6 +52,7 @@ test {
 task dist(type:Zip) {
     // generate artefact zip file under build/distributions directory
     from jar.outputs.files
+	from 'appspec.yml'
 }
 
 dependencies {
