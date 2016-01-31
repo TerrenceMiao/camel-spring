@@ -8,6 +8,7 @@ hooks:
     - location: scripts/installOracleJDK8.bash
       timeout: 300
       runas: ec2-user
+  ApplicationStart:
     - location: scripts/startApp.bash
       timeout: 300
       runas: ec2-user
