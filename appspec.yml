@@ -3,3 +3,15 @@ os: linux
 files:
   - source: /
     destination: /tmp/
+hooks:
+  BeforeInstall:
+    - location: scripts/installOracleJDK8.bash
+      timeout: 300
+      runas: ec2-user
+    - location: scripts/startApp.bash
+      timeout: 300
+      runas: ec2-user
+  ApplicationStop:
+    - location: scripts/stopApp.bash
+      timeout: 300
+      runas: ec2-user

@@ -49,9 +49,15 @@ test {
     }
 }
 
-task dist(type:Zip) {
+task dist(type: Zip) {
     // generate artefact zip file under build/distributions directory
     from jar.outputs.files
+    // copy everything under directory
+    from('scripts/') {
+		fileMode = 0755
+		into('scripts')
+	}
+    // copy a single file
 	from 'appspec.yml'
 }
 
