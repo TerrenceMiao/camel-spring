@@ -61,6 +61,10 @@ task dist(type: Zip) {
 	from 'appspec.yml'
 }
 
+springBoot {
+	executable = true
+}
+
 dependencies {
 	// Spring Boot
 	compile("org.springframework.boot:spring-boot-starter:${springBootVersion}")
