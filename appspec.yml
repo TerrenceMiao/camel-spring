@@ -8,6 +8,9 @@ hooks:
     - location: scripts/installOracleJDK8.bash
       timeout: 300
       runas: root
+  AfterInstall:
+    - location: scripts/stopApp.bash
+      runas: root
   ApplicationStart:
     - location: scripts/startApp.bash
       runas: root
