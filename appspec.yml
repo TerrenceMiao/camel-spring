@@ -10,9 +10,9 @@ hooks:
       runas: ec2-user
   ApplicationStart:
     - location: scripts/startApp.bash
-      timeout: 300
+      timeout: 30
       runas: ec2-user
   ApplicationStop:
     - location: scripts/stopApp.bash
-      timeout: 300
+      timeout: 30
       runas: ec2-user
