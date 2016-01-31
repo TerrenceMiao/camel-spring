@@ -1,6 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-cd /tmp
-
-java -jar camel-spring-1.0-SNAPSHOT.jar
+/etc/init.d/camel-spring start
 

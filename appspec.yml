@@ -9,7 +9,7 @@ hooks:
       timeout: 300
       runas: root
   AfterInstall:
-    - location: scripts/stopApp.bash
+    - location: scripts/serviceApp.bash
       runas: root
   ApplicationStart:
     - location: scripts/startApp.bash

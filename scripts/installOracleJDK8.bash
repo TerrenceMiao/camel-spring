@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 version=$(java -version 2>&1 | sed 's/java version "\(.*\)\.\(.*\)\..*"/\1\2/; 1q')
 
@@ -24,5 +24,3 @@ else
     # Verify if change in SDK was done
     java -version
 fi
-
-exit 0

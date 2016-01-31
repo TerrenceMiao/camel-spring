@@ -1,9 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-isAppExist=$(pgrep java)
+/etc/init.d/camel-spring stop
 
-if [[ -n "$isAppExist" ]]; then
-    kill "$isAppExist"
-fi
-
-exit 0
