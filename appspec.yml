@@ -10,9 +10,10 @@ hooks:
       runas: root
   ApplicationStart:
     - location: scripts/startApp.bash
-      timeout: 300
       runas: root
   ApplicationStop:
     - location: scripts/stopApp.bash
-      timeout: 300
+      runas: root
+  ValidateService:
+    - location: scripts/verifyApp.bash
       runas: root
