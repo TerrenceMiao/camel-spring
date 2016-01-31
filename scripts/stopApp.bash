@@ -6,3 +6,4 @@ if [[ -n "$isAppExist" ]]; then
     kill "$isAppExist"
 fi
 
+exit 0

@@ -2,5 +2,7 @@
 
 cd /tmp
 
-nohup java -jar camel-spring-1.0-SNAPSHOT.jar &
+java -jar camel-spring-1.0-SNAPSHOT.jar &
+
+exit 0
 

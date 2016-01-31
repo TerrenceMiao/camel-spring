@@ -24,3 +24,5 @@ else
     # Verify if change in SDK was done
     java -version
 fi
+
+exit 0
