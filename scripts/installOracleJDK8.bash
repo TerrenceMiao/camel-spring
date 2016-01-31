@@ -15,11 +15,11 @@ else
     wget --no-cookies --header "Cookie: gpw_e24=xxx; oraclelicense=accept-securebackup-cookie;" http://download.oracle.com/otn-pub/java/jdk/8u72-b15/jdk-8u72-linux-x64.tar.gz
 
     # Install Oracle JDK
-    sudo rm -rf /usr/local/jdk1.8.0_72
-    sudo tar xvfz jdk-8u72-linux-x64.tar.gz -C /usr/local
+    rm -rf /usr/local/jdk1.8.0_72
+    tar xvfz jdk-8u72-linux-x64.tar.gz -C /usr/local
 
     # Create alternative for Oracle JDK
-    sudo /usr/sbin/alternatives --install /usr/bin/java java /usr/local/jdk1.8.0_72/bin/java 20000
+    /usr/sbin/alternatives --install /usr/bin/java java /usr/local/jdk1.8.0_72/bin/java 20000
 
     # Verify if change in SDK was done
     java -version
