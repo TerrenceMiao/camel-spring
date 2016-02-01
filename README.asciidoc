@@ -36,6 +36,7 @@ References
 ----------
 - Start Spring Boot project with Spring Initializer, _https://start.spring.io/_
 - Enterprise Integration Patterns by Apache Camel, _http://camel.apache.org/enterprise-integration-patterns.html_
+- Hawtio - a modular web console for managing Java stuff, _http://hawt.io/_
 - AsciiDoc Syntax Quick Reference, _http://asciidoctor.org/docs/asciidoc-syntax-quick-reference_
 - Travis CI AWS CodeDeploy, _https://docs.travis-ci.com/user/deployment/codedeploy/_
 - Create an Application with AWS CodeDeploy, _http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-application.html_
