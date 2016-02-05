@@ -19,7 +19,7 @@ Development
 - Ready, Set, Go
 [source.console]
 ----
-$ $GRADLE_HOME/bin/gradle clean build
+$ $GRADLE_HOME/bin/gradle --parallel --max-workers=2 clean build
 
 $ $GRADLE_HOME/bin/gradle bootRun
 
