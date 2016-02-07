@@ -17,13 +17,14 @@ image:doc/EC2 - Tags.png[]
 - Create "CodeDeploy" group in IAM with S3 and CodeDeploy Full Access policies
 image:doc/IAM - CodeDeploy group.png[]
 
-- Create "CodeDeploy" user in IAM who is in "CodeDeploy" group
+- Create "CodeDeploy" user in IAM who is in "CodeDeploy" group, used in Travis CI's CodeDeploy configuration - .travis.yml
 image:doc/IAM - CodeDeploy user.png[]
 
 - Create new applcation in CodeDeploy
 image:doc/CodeDeploy - Application.png[]
 
-- Create artefact bucket in S3
+- Create artefact bucket in S3, used in Travis CI's CodeDeploy configuration - .travis.yml
+image:doc/S3 - Bucket.png[]
 
 Reference
 ---------
