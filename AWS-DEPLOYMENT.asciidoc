@@ -6,17 +6,23 @@ as application deployed and run in cloud solution. And https://travis-ci.org/[Tr
 
 Set up
 ------
+- Create "CodeDeploy" service role in IAM with S3 and CodeDeploy Full Access policies
+image:doc/IAM - CodeDeploy role.png[]
+image:doc/IAM - Instance role.png[]
+
 - Launch an EC2 instance with Key Pair and Tag Name
 image:doc/EC2 - Description.png[]
 image:doc/EC2 - Tags.png[]
+
 - Create "CodeDeploy" group in IAM with S3 and CodeDeploy Full Access policies
 image:doc/IAM - CodeDeploy group.png[]
+
 - Create "CodeDeploy" user in IAM who is in "CodeDeploy" group
 image:doc/IAM - CodeDeploy user.png[]
-- Create "CodeDeploy" service role in IAM with S3 and CodeDeploy Full Access policies
-image:doc/IAM - CodeDeploy service role.png[]
+
 - Create new applcation in CodeDeploy
 image:doc/CodeDeploy - Application.png[]
+
 - Create artefact bucket in S3
 
 Reference
