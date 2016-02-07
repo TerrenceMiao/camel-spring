@@ -8,7 +8,68 @@ Set up
 ------
 - Create "CodeDeploy" service role in IAM with S3 and CodeDeploy Full Access policies
 image:doc/IAM - CodeDeploy role.png[]
+[source,json]
+------------------------------------------------------------
+{
+    "Statement": [
+        {
+            "Resource": [
+                "*"
+            ],
+            "Action": [
+                "ec2:Describe*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Resource": [
+                "*"
+            ],
+            "Action": [
+                "autoscaling:CompleteLifecycleAction",
+                "autoscaling:DeleteLifecycleHook",
+                "autoscaling:DescribeLifecycleHooks",
+                "autoscaling:DescribeAutoScalingGroups",
+                "autoscaling:PutLifecycleHook",
+                "autoscaling:RecordLifecycleActionHeartbeat"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Resource": [
+                "*"
+            ],
+            "Action": [
+                "Tag:getResources",
+                "Tag:getTags",
+                "Tag:getTagsForResource",
+                "Tag:getTagsForResourceList"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}
+------------------------------------------------------------
+
 image:doc/IAM - Instance role.png[]
+[source,json]
+---------------------------------------------
+{
+    "Statement": [
+        {
+            "Resource": "*",
+            "Action": [
+                "autoscaling:Describe*",
+                "cloudformation:Describe*",
+                "cloudformation:GetTemplate",
+                "s3:List*",
+                "s3:Get*"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}
+---------------------------------------------
 
 - Launch an EC2 instance with Key Pair and Tag Name
 image:doc/EC2 - Description.png[]
