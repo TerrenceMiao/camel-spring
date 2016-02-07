@@ -7,6 +7,8 @@ as application deployed and run in cloud solution. And https://travis-ci.org/[Tr
 Set up
 ------
 - Launch an EC2 instance with Key Pair and Tag Name
+image:doc/EC2 - Description.png[]
+image:doc/EC2 - Tags.png[]
 - Create "CodeDeploy" group in IAM with S3 and CodeDeploy Full Access policies
 image:doc/IAM - CodeDeploy group.png[]
 - Create "CodeDeploy" user in IAM who is in "CodeDeploy" group
