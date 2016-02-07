@@ -87,6 +87,8 @@ image:doc/CodeDeploy - Application.png[]
 - Create artefact bucket in S3, used in Travis CI's CodeDeploy configuration - .travis.yml
 image:doc/S3 - Bucket.png[]
 
+- Play at http://ec2-54-206-9-184.ap-southeast-2.compute.amazonaws.com:8080/hawtio/index.html
+
 Reference
 ---------
 - AWS CodeDeploy – A Sample walk-through, _http://www.tothenew.com/blog/aws-code-deploy-a-sample-walkthrough/_
