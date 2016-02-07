@@ -90,4 +90,5 @@ image:doc/S3 - Bucket.png[]
 Reference
 ---------
 - AWS CodeDeploy – A Sample walk-through, _http://www.tothenew.com/blog/aws-code-deploy-a-sample-walkthrough/_
+- AWS IAM Policy Simulator, _https://policysim.aws.amazon.com/home/index.jsp_
 - Make Spring Boot application executable as a service on Linux / Unix, _http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html_
