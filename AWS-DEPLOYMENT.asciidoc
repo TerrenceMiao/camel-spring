@@ -96,4 +96,5 @@ Reference
 - AWS CodeDeploy – A Sample walk-through, http://www.tothenew.com/blog/aws-code-deploy-a-sample-walkthrough/
 - AWS IAM Policy Simulator, https://policysim.aws.amazon.com/home/index.jsp
 - AWS CodeDeploy Agent Operations, http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-run-agent.html
+- AWS CodeDeploy Resource Kit, http://docs.aws.amazon.com/codedeploy/latest/userguide/resource-kit.html
 - Make Spring Boot application executable as a service on Linux / Unix, http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html
