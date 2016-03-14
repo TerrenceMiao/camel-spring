@@ -89,8 +89,8 @@ dependencies {
 	// Hawtio for Spring Boot
 	compile "io.hawt:hawtio-springboot:${dependencyVersionHawtio}"
 
-	// JavaSlang
-	compile "io.javaslang:javaslang:${dependencyVersionJavaSlang}"
+    // Cyclops React
+    compile "com.aol.simplereact:cyclops-react:${dependencyVersionCyclopsReact}"
 
 	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
