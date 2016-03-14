@@ -1,11 +1,18 @@
 package org.paradise.monad;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * Created by terrence on 14/03/2016.
  */
-public abstract class Try<V> {
+public abstract class Try<A> {
+
+    protected A value;
+
+    public Try(A value) {
+        this.value = value;
+    }
 
     public abstract Boolean isSuccess();
 
@@ -13,20 +20,24 @@ public abstract class Try<V> {
 
     public abstract void throwException();
 
+    public abstract <B> Try<B> map(Function<? super A, ? extends B> mapper);
 
-    public static <V> Try<V> failure(String message) {
+    public abstract <B> Try<B> flatMap(Function<? super A, Try<? extends B>> mapper);
+
+
+    public <A> Try<A> failure(String message) {
         return new TryFailure<>(message);
     }
 
-    public static <V> Try<V> failure(Exception e) {
+    public <A> Try<A> failure(Exception e) {
         return new TryFailure<>(e);
     }
 
-    public static <V> Try<V> failure(String message, Exception e) {
+    public <A> Try<A> failure(String message, Exception e) {
         return new TryFailure<>(message, e);
     }
 
-    public static <V> Try<V> success(V value) {
+    public <A> Try<A> success(A value) {
         return new TrySuccess<>(value);
     }
 
@@ -36,14 +47,14 @@ public abstract class Try<V> {
         }
     }
 
-    public void ifPresentOrThrow(Consumer<V> c) {
+    public void ifPresentOrThrow(Consumer<A> c) {
         if (isSuccess()) {
             c.accept(successValue());
         } else {
-            throw ((TryFailure<V>) this).getException();
+            throw ((TryFailure<A>) this).getException();
         }
     }
-    public Try<RuntimeException> ifPresentOrFail(Consumer<V> c) {
+    public Try<RuntimeException> ifPresentOrFail(Consumer<A> c) {
         if (isSuccess()) {
             c.accept(successValue());
             return failure("Failed to fail!");
@@ -52,11 +63,11 @@ public abstract class Try<V> {
         }
     }
 
-    private <V> V successValue() {
+    private <A> A successValue() {
         return null;
     }
 
-    private <V> V failureValue() {
+    private <A> A failureValue() {
         return null;
     }
 
