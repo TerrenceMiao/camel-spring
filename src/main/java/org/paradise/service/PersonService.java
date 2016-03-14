@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * Created by terrence on 12/03/2016.
  */
-public class CarService {
+public class PersonService {
 
     String getCarInsuranceName(Person person) {
 
@@ -29,6 +29,13 @@ public class CarService {
                 .flatMap(Car::getInsurance)
                 .map(Insurance::getPolicy)
                 .orElseThrow(() -> new NullValueException())
+                ;
+    }
+
+    String getAddressCityName(Person person) {
+
+        return person.getAddress(person)
+                .ifPresent(person);
                 ;
     }
 

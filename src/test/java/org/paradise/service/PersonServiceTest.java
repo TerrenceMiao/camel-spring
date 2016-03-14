@@ -13,14 +13,14 @@ import static org.junit.Assert.assertSame;
 /**
  * Created by terrence on 12/03/2016.
  */
-public class CarServiceTest {
+public class PersonServiceTest {
 
     String insuranceName = "Pacific Insurance";
     String insurancePolicy = "Pacific Insurance Policy";
 
     Person person;
 
-    CarService carService = new CarService();
+    PersonService personService = new PersonService();
 
     @Before
     public void setUp() throws Exception {
@@ -37,42 +37,42 @@ public class CarServiceTest {
 
         person = new Person(new Car(new Insurance(insuranceName, insurancePolicy)));
 
-        assertSame("Incorrect car insurance name", insuranceName, carService.getCarInsuranceName(person));
-        assertSame("Incorrect car insurance policy", insurancePolicy, carService.getCarInsurancePolicy(person));
+        assertSame("Incorrect car insurance name", insuranceName, personService.getCarInsuranceName(person));
+        assertSame("Incorrect car insurance policy", insurancePolicy, personService.getCarInsurancePolicy(person));
     }
 
     @Test
     public void testGetCarInsuranceNameUnknown() {
 
         person = new Person(null);
-        assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
+        assertSame("Incorrect car insurance name", "Unknown", personService.getCarInsuranceName(person));
 
         person = new Person(new Car(null));
-        assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
+        assertSame("Incorrect car insurance name", "Unknown", personService.getCarInsuranceName(person));
 
         person = new Person(new Car(new Insurance(null, insurancePolicy)));
-        assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
+        assertSame("Incorrect car insurance name", "Unknown", personService.getCarInsuranceName(person));
     }
 
     @Test(expected = NullValueException.class)
     public void testGetCarInsurancePolicyExceptionWhenPersonIsNull() throws Exception {
 
         person = new Person(null);
-        carService.getCarInsurancePolicy(person);
+        personService.getCarInsurancePolicy(person);
     }
 
     @Test(expected = NullValueException.class)
     public void testGetCarInsurancePolicyExceptionWhenCarIsNull() throws Exception {
 
         person = new Person(new Car(null));
-        carService.getCarInsurancePolicy(person);
+        personService.getCarInsurancePolicy(person);
     }
 
     @Test(expected = NullValueException.class)
     public void testGetCarInsurancePolicyExceptionWhenPolicyIsNull() throws Exception {
 
         person = new Person(new Car(new Insurance(insuranceName, null)));
-        carService.getCarInsurancePolicy(person);
+        personService.getCarInsurancePolicy(person);
     }
 
 }
