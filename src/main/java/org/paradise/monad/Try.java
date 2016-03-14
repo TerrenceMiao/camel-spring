@@ -13,20 +13,21 @@ public abstract class Try<V> {
 
     public abstract void throwException();
 
+
     public static <V> Try<V> failure(String message) {
-        return new Failure<>(message);
+        return new TryFailure<>(message);
     }
 
     public static <V> Try<V> failure(Exception e) {
-        return new Failure<>(e);
+        return new TryFailure<>(e);
     }
 
     public static <V> Try<V> failure(String message, Exception e) {
-        return new Failure<>(message, e);
+        return new TryFailure<>(message, e);
     }
 
     public static <V> Try<V> success(V value) {
-        return new Success<>(value);
+        return new TrySuccess<>(value);
     }
 
     public void ifPresent(Consumer c) {
@@ -39,7 +40,7 @@ public abstract class Try<V> {
         if (isSuccess()) {
             c.accept(successValue());
         } else {
-            throw ((Failure<V>) this).getException();
+            throw ((TryFailure<V>) this).getException();
         }
     }
     public Try<RuntimeException> ifPresentOrFail(Consumer<V> c) {
