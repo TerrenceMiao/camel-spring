@@ -15,6 +15,7 @@ import static org.junit.Assert.assertSame;
 public class CarServiceTest {
 
     String insuranceName = "Pacific Insurance";
+    String insurancePolicy = "Pacific Insurance Policy";
 
     Person person;
 
@@ -31,14 +32,16 @@ public class CarServiceTest {
     }
 
     @Test
-    public void testGetCarInsuranceName() throws Exception {
+    public void testGetCarInsuranceNameAndPolicy() throws Exception {
 
-        person = new Person(new Car(new Insurance(insuranceName)));
+        person = new Person(new Car(new Insurance(insuranceName, insurancePolicy)));
+
         assertSame("Incorrect car insurance name", insuranceName, carService.getCarInsuranceName(person));
+        assertSame("Incorrect car insurance policy", insurancePolicy, carService.getCarInsurancePolicy(person));
     }
 
     @Test
-    public void testGetCarInsuranceNameNull() throws Exception {
+    public void testGetCarInsuranceNameUnknown() {
 
         person = new Person(null);
         assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
@@ -46,8 +49,29 @@ public class CarServiceTest {
         person = new Person(new Car(null));
         assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
 
-        person = new Person(new Car(new Insurance(null)));
+        person = new Person(new Car(new Insurance(null, insurancePolicy)));
         assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testGetCarInsurancePolicyExceptionWhenPersonIsNull() {
+
+        person = new Person(null);
+        carService.getCarInsurancePolicy(person);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testGetCarInsurancePolicyExceptionWhenCarIsNull() {
+
+        person = new Person(new Car(null));
+        carService.getCarInsurancePolicy(person);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testGetCarInsurancePolicyExceptionWhenPolicyIsNull() {
+
+        person = new Person(new Car(new Insurance(insuranceName, null)));
+        carService.getCarInsurancePolicy(person);
     }
 
 }

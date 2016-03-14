@@ -1,30 +1,29 @@
 package org.paradise.monad;
 
-import java.util.function.Function;
-
 /**
- * Created by terrence on 12/03/2016.
+ * Created by terrence on 14/03/2016.
  */
-public class Success<L, A> extends Validation<L, A> {
+public class Success<V> extends Try<V> {
 
-    public Success(A value) {
-        super(value);
+    private V value;
+
+    public Success(V value) {
+        super();
+        this.value = value;
     }
 
-    public <B> Validation<L, B> map(Function<? super A, ? extends B> mapper) {
-        return success(mapper.apply(value));
-    }
-
-    public <B> Validation<L, B> flatMap(Function<? super A, Validation<?, ? extends B>> mapper) {
-        return (Validation<L, B>) mapper.apply(value);
-    }
-
-    public boolean isSuccess() {
+    @Override
+    public Boolean isSuccess() {
         return true;
     }
 
-    public static <L, A> Success<L, A> success(A value) {
-        return new Success<>(value);
+    @Override
+    public Boolean isFailure() {
+        return false;
+    }
+
+    @Override
+    public void throwException() {
     }
 
 }

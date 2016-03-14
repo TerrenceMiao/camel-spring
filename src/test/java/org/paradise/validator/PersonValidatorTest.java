@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.paradise.domain.Car;
 import org.paradise.domain.Insurance;
 import org.paradise.domain.Person;
-import org.paradise.monad.Failure;
-import org.paradise.monad.Success;
+import org.paradise.monad.ValidationFailure;
+import org.paradise.monad.ValidationSuccess;
 
 import static org.junit.Assert.assertTrue;
 
@@ -17,8 +17,9 @@ import static org.junit.Assert.assertTrue;
 public class PersonValidatorTest {
 
     String insuranceName = "Pacific Insurance";
+    String insurancePolicy = "Pacific Insurance Policy";
 
-    Person person = new Person(new Car(new Insurance(insuranceName)));
+    Person person = new Person(new Car(new Insurance(insuranceName, insurancePolicy)));
 
     @Before
     public void setUp() throws Exception {
@@ -34,26 +35,26 @@ public class PersonValidatorTest {
     public void testValidateAgePassed() throws Exception {
 
         person.setAge(1);
-        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof Success);
+        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof ValidationSuccess);
 
         person.setAge(129);
-        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof Success);
+        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof ValidationSuccess);
 
         person.setAge(100);
-        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof Success);
+        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof ValidationSuccess);
     }
 
     @Test
     public void testValidateAgeFailed() throws Exception {
 
         person.setAge(0);
-        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof Failure);
+        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof ValidationFailure);
 
         person.setAge(130);
-        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof Failure);
+        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof ValidationFailure);
 
         person.setAge(-1);
-        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof Failure);
+        assertTrue("Incorrect age", PersonValidator.validateAge(person) instanceof ValidationFailure);
     }
 
     @Test
@@ -62,7 +63,7 @@ public class PersonValidatorTest {
         person.setAge(30);
         person.setName("Terrence");
 
-        new Success<>(person)
+        new ValidationSuccess<>(person)
                 .flatMap(PersonValidator::validateAge)
                 .flatMap(PersonValidator::validateName);
     }

@@ -1,20 +1,24 @@
 package org.paradise.domain;
 
-import java.util.Optional;
-
 /**
  * Created by terrence on 12/03/2016.
  */
 public class Insurance {
 
     private static String name;
+    private static String policy;
 
-    public Insurance(String name) {
+    public Insurance(String name, String policy) {
         this.name = name;
+        this.policy = policy;
     }
 
     public static <U> String getName(U u) {
         return name;
+    }
+
+    public static <U> String getPolicy(U u) {
+        return policy;
     }
 
 }

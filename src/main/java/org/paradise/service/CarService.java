@@ -17,7 +17,18 @@ public class CarService {
                 .flatMap(Person::getCar)
                 .flatMap(Car::getInsurance)
                 .map(Insurance::getName)
-                .orElse("Unknown");
+                .orElse("Unknown")
+                ;
+    }
+
+    String getCarInsurancePolicy(Person person) {
+
+        return Optional.of(person)
+                .flatMap(Person::getCar)
+                .flatMap(Car::getInsurance)
+                .map(Insurance::getPolicy)
+                .orElseThrow(() -> new RuntimeException())
+                ;
     }
 
 }

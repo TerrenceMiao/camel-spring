@@ -1,31 +1,45 @@
 package org.paradise.monad;
 
-import java.util.function.Function;
-
 /**
- * Created by terrence on 12/03/2016.
+ * Created by terrence on 14/03/2016.
  */
-public class Failure<L, A> extends Validation<L, A> {
+public class Failure<V> extends Try<V> {
 
-    protected final L left;
+    private RuntimeException exception;
 
-    public Failure(L left, A value) {
-        super(value);
-        this.left = left;
+    public Failure(String message) {
+        super();
+        this.exception = new IllegalStateException(message);
     }
 
-    public <B> Validation<L, B> map(Function<? super A, ? extends B> mapper) {
-        return new Failure(left, mapper.apply(value));
+    public Failure(String message, Exception e) {
+        super();
+        this.exception = new IllegalStateException(message, e);
     }
 
-    public <B> Validation<L, B> flatMap(Function<? super A, Validation<?, ? extends B>> mapper) {
-        Validation<?, ? extends B> result = mapper.apply(value);
-
-        return result.isSuccess() ? new Failure(left, result.value) : new Failure(((Failure<L, B>) result).left, result.value);
+    public Failure(Exception e) {
+        super();
+        this.exception = new IllegalStateException(e);
     }
 
-    public boolean isSuccess() {
+    @Override
+    public Boolean isSuccess() {
         return false;
     }
 
+    @Override
+    public Boolean isFailure() {
+        return true;
+    }
+
+    @Override
+    public void throwException() {
+        throw this.exception;
+    }
+
+    public RuntimeException getException() {
+        return exception;
+    }
+
 }
+
