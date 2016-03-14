@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.paradise.domain.Car;
 import org.paradise.domain.Insurance;
 import org.paradise.domain.Person;
+import org.paradise.exception.NullValueException;
 
 import static org.junit.Assert.assertSame;
 
@@ -53,22 +54,22 @@ public class CarServiceTest {
         assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testGetCarInsurancePolicyExceptionWhenPersonIsNull() {
+    @Test(expected = NullValueException.class)
+    public void testGetCarInsurancePolicyExceptionWhenPersonIsNull() throws Exception {
 
         person = new Person(null);
         carService.getCarInsurancePolicy(person);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testGetCarInsurancePolicyExceptionWhenCarIsNull() {
+    @Test(expected = NullValueException.class)
+    public void testGetCarInsurancePolicyExceptionWhenCarIsNull() throws Exception {
 
         person = new Person(new Car(null));
         carService.getCarInsurancePolicy(person);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testGetCarInsurancePolicyExceptionWhenPolicyIsNull() {
+    @Test(expected = NullValueException.class)
+    public void testGetCarInsurancePolicyExceptionWhenPolicyIsNull() throws Exception {
 
         person = new Person(new Car(new Insurance(insuranceName, null)));
         carService.getCarInsurancePolicy(person);
