@@ -89,6 +89,9 @@ dependencies {
 	// Hawtio for Spring Boot
 	compile "io.hawt:hawtio-springboot:${dependencyVersionHawtio}"
 
+	// JavaSlang
+	compile "io.javaslang:javaslang:${dependencyVersionJavaSlang}"
+
 	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
