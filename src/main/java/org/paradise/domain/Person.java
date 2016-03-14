@@ -2,6 +2,8 @@ package org.paradise.domain;
 
 import org.paradise.exception.NullValueException;
 import org.paradise.monad.Try;
+import org.paradise.monad.TryFailure;
+import org.paradise.monad.TrySuccess;
 
 import java.util.Optional;
 
@@ -29,8 +31,8 @@ public class Person {
     public static <U> Try<Address> getAddress(U u) {
 
         return address == null
-                ? Try.failure(u.toString(), new NullValueException("Address is NULL"))
-                : Try.success(address);
+                ? new TryFailure<>(address).failure(u.toString(), new NullValueException("Address is NULL"))
+                : new TrySuccess(address);
     }
 
     public String getName() {

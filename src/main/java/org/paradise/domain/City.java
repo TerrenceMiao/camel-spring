@@ -12,7 +12,7 @@ public class City {
         this.name = name;
     }
 
-    public static String getName() {
+    public static <U> String getName(U u) {
         return name;
     }
 

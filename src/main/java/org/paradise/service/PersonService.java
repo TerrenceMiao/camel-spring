@@ -1,8 +1,6 @@
 package org.paradise.service;
 
-import org.paradise.domain.Car;
-import org.paradise.domain.Insurance;
-import org.paradise.domain.Person;
+import org.paradise.domain.*;
 import org.paradise.exception.NullValueException;
 
 import java.util.Optional;
@@ -32,11 +30,35 @@ public class PersonService {
                 ;
     }
 
-    String getAddressCityName(Person person) {
+    void getAddressCityNameIfPresent(Person person) {
 
-        return person.getAddress(person)
-                .ifPresent(person);
+        person.getAddress(person)
+                .flatMap(Address::getCity)
+                .ifPresent(this::process)
+                .map(City::getName)
                 ;
+    }
+
+    void getAddressCityNameIfPresentOrFail(Person person) {
+
+        person.getAddress(person)
+                .flatMap(Address::getCity)
+                .ifPresentOrFail(this::process)
+                .map(City::getName)
+        ;
+    }
+
+    void getAddressCityNameIfPresentOrThrow(Person person) {
+
+        person.getAddress(person)
+                .flatMap(Address::getCity)
+                .ifPresentOrThrow(this::process)
+                .map(City::getName)
+        ;
+    }
+
+    private <U> U process(U u) {
+        return u;
     }
 
 }

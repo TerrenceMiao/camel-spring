@@ -26,49 +26,45 @@ public abstract class Try<A> {
 
 
     public <A> Try<A> failure(String message) {
-        return new TryFailure<>(message);
+        return new TryFailure<>((A) value, message);
     }
 
     public <A> Try<A> failure(Exception e) {
-        return new TryFailure<>(e);
+        return new TryFailure<>((A) value, e);
     }
 
     public <A> Try<A> failure(String message, Exception e) {
-        return new TryFailure<>(message, e);
+        return new TryFailure<>((A) value, message, e);
     }
 
     public <A> Try<A> success(A value) {
         return new TrySuccess<>(value);
     }
 
-    public void ifPresent(Consumer c) {
+    public Try<A> ifPresent(Consumer c) {
         if (isSuccess()) {
-            c.accept(successValue());
+            c.accept(value);
+            return success(value);
+        } else {
+            return success(null);
         }
     }
 
-    public void ifPresentOrThrow(Consumer<A> c) {
+    public Try<A> ifPresentOrThrow(Consumer<A> c) {
         if (isSuccess()) {
-            c.accept(successValue());
+            c.accept(value);
+            return success(value);
         } else {
             throw ((TryFailure<A>) this).getException();
         }
     }
-    public Try<RuntimeException> ifPresentOrFail(Consumer<A> c) {
+    public Try<A> ifPresentOrFail(Consumer<A> c) {
         if (isSuccess()) {
-            c.accept(successValue());
-            return failure("Failed to fail!");
+            c.accept(value);
+            return success(value);
         } else {
-            return success(failureValue());
+            return failure("Failed to fail!");
         }
-    }
-
-    private <A> A successValue() {
-        return null;
-    }
-
-    private <A> A failureValue() {
-        return null;
     }
 
 }
