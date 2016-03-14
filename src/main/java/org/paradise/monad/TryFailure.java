@@ -3,21 +3,21 @@ package org.paradise.monad;
 /**
  * Created by terrence on 14/03/2016.
  */
-public class Failure<V> extends Try<V> {
+public class TryFailure<V> extends Try<V> {
 
     private RuntimeException exception;
 
-    public Failure(String message) {
+    public TryFailure(String message) {
         super();
         this.exception = new IllegalStateException(message);
     }
 
-    public Failure(String message, Exception e) {
+    public TryFailure(String message, Exception e) {
         super();
         this.exception = new IllegalStateException(message, e);
     }
 
-    public Failure(Exception e) {
+    public TryFailure(Exception e) {
         super();
         this.exception = new IllegalStateException(e);
     }
