@@ -7,26 +7,22 @@ import org.paradise.domain.Car;
 import org.paradise.domain.Insurance;
 import org.paradise.domain.Person;
 
-import java.util.Optional;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 
 /**
  * Created by terrence on 12/03/2016.
  */
 public class CarServiceTest {
 
-    Optional<Insurance> insurance = Optional.of(new Insurance());
-    Optional<Car> car = Optional.of(new Car());
-    Optional<Person> person = Optional.of(new Person());
+    String insuranceName = "Pacific Insurance";
+
+    Person person;
 
     CarService carService = new CarService();
 
     @Before
     public void setUp() throws Exception {
 
-        car.get().setInsurance(insurance);
-        person.get().setCar(car);
     }
 
     @After
@@ -37,6 +33,20 @@ public class CarServiceTest {
     @Test
     public void testGetCarInsuranceName() throws Exception {
 
+        person = new Person(new Car(new Insurance(insuranceName)));
+        assertSame("Incorrect car insurance name", insuranceName, carService.getCarInsuranceName(person));
+    }
+
+    @Test
+    public void testGetCarInsuranceNameNull() throws Exception {
+
+        person = new Person(null);
+        assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
+
+        person = new Person(new Car(null));
+        assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
+
+        person = new Person(new Car(new Insurance(null)));
         assertSame("Incorrect car insurance name", "Unknown", carService.getCarInsuranceName(person));
     }
 

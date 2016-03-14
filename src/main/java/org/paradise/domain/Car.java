@@ -7,14 +7,14 @@ import java.util.Optional;
  */
 public class Car {
 
-    private Optional<Insurance> insurance;
+    private static Optional<Insurance> insurance;
 
-    public Optional<Insurance> getInsurance() {
-        return insurance;
+    public Car(Insurance insurance) {
+        this.insurance = Optional.ofNullable(insurance);
     }
 
-    public void setInsurance(Optional<Insurance> insurance) {
-        this.insurance = insurance;
+    public static <U> Optional<Insurance> getInsurance(U u) {
+        return insurance;
     }
 
 }

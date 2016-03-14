@@ -11,10 +11,9 @@ import java.util.Optional;
  */
 public class CarService {
 
+    String getCarInsuranceName(Person person) {
 
-    String getCarInsuranceName(Optional<Person> person) {
-
-        return person
+        return Optional.of(person)
                 .flatMap(Person::getCar)
                 .flatMap(Car::getInsurance)
                 .map(Insurance::getName)

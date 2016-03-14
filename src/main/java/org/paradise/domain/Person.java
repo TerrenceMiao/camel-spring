@@ -10,14 +10,14 @@ public class Person {
     private String name;
     private int age;
 
-    private Optional<Car> car;
+    private static Optional<Car> car;
 
-    public Optional<Car> getCar() {
-        return car;
+    public Person(Car car) {
+        this.car = Optional.ofNullable(car);
     }
 
-    public void setCar(Optional<Car> car) {
-        this.car = car;
+    public static <U> Optional<Car> getCar(U u) {
+        return car;
     }
 
     public String getName() {

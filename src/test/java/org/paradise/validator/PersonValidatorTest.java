@@ -3,22 +3,22 @@ package org.paradise.validator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.paradise.domain.Car;
+import org.paradise.domain.Insurance;
 import org.paradise.domain.Person;
 import org.paradise.monad.Failure;
 import org.paradise.monad.Success;
-import org.paradise.monad.Validation;
-import org.springframework.validation.Validator;
 
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by terrence on 12/03/2016.
  */
 public class PersonValidatorTest {
 
-    Person person = new Person();
+    String insuranceName = "Pacific Insurance";
+
+    Person person = new Person(new Car(new Insurance(insuranceName)));
 
     @Before
     public void setUp() throws Exception {
