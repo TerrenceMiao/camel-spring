@@ -22,6 +22,10 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
 	public void configure() {
 
 		from("timer:trigger")
+				// hard code break point
+				.process(exchange -> {
+					assert true;
+				})
 				.transform().simple("ref:myBean")
 				.to("log:out");
 	}
