@@ -24,6 +24,13 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
 		from("timer:trigger")
 				// hard code break point
 				.process(exchange -> System.out.println())
+				// Add the following line before a bean, for example:
+				//
+				//   .to("file:///Users/terrence/Projects/pcc")
+				//   .to("cxf:bean:labelPrintServiceEndpoint?dataFormat=POJO")
+				//
+				// under "/Users/terrence/Projects/pcc" directory, HTTP/SOAP request will put into file e.g.
+                // "ID-muffler-53122-1459400952912-0-11"
 				.transform().simple("ref:myBean")
 				.to("log:out");
 	}
