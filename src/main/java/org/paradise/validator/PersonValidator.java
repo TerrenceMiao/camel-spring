@@ -4,10 +4,12 @@ import org.paradise.domain.Person;
 import org.paradise.monad.ValidationFailure;
 import org.paradise.monad.ValidationSuccess;
 import org.paradise.monad.Validation;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by terrence on 12/03/2016.
  */
+@Component
 public class PersonValidator {
 
     public static Validation<String, Person> validateAge(Person p) {
@@ -16,6 +18,11 @@ public class PersonValidator {
 
     public static Validation<String, Person> validateName(Person p) {
         return Character.isUpperCase(p.getName().charAt(0)) ? new ValidationSuccess(p) : new ValidationFailure("Name must start with uppercase", p);
+    }
+
+    public Boolean validate(Person p) {
+
+        return Boolean.FALSE;
     }
 
 }

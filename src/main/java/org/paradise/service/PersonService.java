@@ -1,14 +1,25 @@
 package org.paradise.service;
 
-import org.paradise.domain.*;
+import org.paradise.domain.Address;
+import org.paradise.domain.Car;
+import org.paradise.domain.City;
+import org.paradise.domain.Insurance;
+import org.paradise.domain.Person;
 import org.paradise.exception.NullValueException;
+import org.paradise.validator.PersonValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 /**
  * Created by terrence on 12/03/2016.
  */
+@Service
 public class PersonService {
+
+    @Autowired
+    PersonValidator personValidator;
 
     String getCarInsuranceName(Person person) {
 
@@ -55,6 +66,11 @@ public class PersonService {
                 .ifPresentOrThrow(this::process)
                 .map(City::getName)
         ;
+    }
+
+    Boolean isPersonValid(Person person) {
+
+        return personValidator.validate(person);
     }
 
     private <U> U process(U u) {

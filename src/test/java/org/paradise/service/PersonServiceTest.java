@@ -3,16 +3,27 @@ package org.paradise.service;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.paradise.domain.Car;
 import org.paradise.domain.Insurance;
 import org.paradise.domain.Person;
 import org.paradise.exception.NullValueException;
+import org.paradise.validator.PersonValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by terrence on 12/03/2016.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class PersonServiceTest {
 
     String insuranceName = "Pacific Insurance";
@@ -20,7 +31,11 @@ public class PersonServiceTest {
 
     Person person;
 
-    PersonService personService = new PersonService();
+    @InjectMocks
+    PersonService personService;
+
+    @Mock
+    PersonValidator mockPersonValidator;
 
     @Before
     public void setUp() throws Exception {
@@ -73,6 +88,15 @@ public class PersonServiceTest {
 
         person = new Person(new Car(new Insurance(insuranceName, null)));
         personService.getCarInsurancePolicy(person);
+    }
+
+    @Test
+    public void testIsPersonValid() throws Exception {
+
+        person = new Person(new Car(new Insurance(insuranceName, null)));
+        when(mockPersonValidator.validate(person)).thenReturn(Boolean.TRUE);
+
+        assertTrue(personService.isPersonValid(person));
     }
 
 }
