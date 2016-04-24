@@ -18,8 +18,11 @@ import java.util.Optional;
 @Service
 public class PersonService {
 
-    @Autowired
-    PersonValidator personValidator;
+    private final PersonValidator personValidator;
+
+    public PersonService(PersonValidator personValidator) {
+        this.personValidator = personValidator;
+    }
 
     String getCarInsuranceName(Person person) {
 
