@@ -20,6 +20,7 @@ public class PersonService {
 
     private final PersonValidator personValidator;
 
+    @Autowired
     public PersonService(PersonValidator personValidator) {
         this.personValidator = personValidator;
     }
