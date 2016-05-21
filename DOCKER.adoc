@@ -103,10 +103,25 @@ demo_1 |  :: Spring Boot ::        (v1.3.1.RELEASE)
 
 - Test Camel / Spring Boot demo, go to URL: http://localhost:8080/hawtio/index.html
 
+- Logon Camel / Spring Boot demo Docker container
+[source.console]
+----
+𝜆 docker ps -a
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+a95af25f978e        camel-spring:latest   "/usr/local/jdk/bin/j"   6 minutes ago       Up 7 seconds        0.0.0.0:8080->8080/tcp   camelspring_demo_1
+
+𝜆 docker exec -it camelspring_demo_1 /bin/sh
+/ # ps auxw
+PID   USER     TIME   COMMAND
+    1 root       0:10 /usr/local/jdk/bin/java -jar camel-spring.jar
+   27 root       0:00 /bin/sh
+   39 root       0:00 ps auxw
+/ #
+----
+
 - Stop Camel / Spring Boot demo in Docker
 [source.console]
 ----
 𝜆 docker-compose stop demo
 Stopping camelspring_demo_1 ... done
 ----
-
