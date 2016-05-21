@@ -1,4 +1,4 @@
 demo:
-    image: camel-spring:latest
+    image: jtech/camel-spring:latest
     ports:
         - 8080:8080
