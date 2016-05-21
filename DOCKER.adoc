@@ -45,14 +45,14 @@ c4a79cd86219
 - Remove ALL Docker’s images
 [source.console]
 ----
-𝜆 docker rmi (docker images -q
+𝜆 docker rmi (docker images -q)
 ... ...
 ----
 
 - Build Docker image
 [source.console]
 ----
-𝜆 docker build -t camel-spring:latest .
+𝜆 docker build -t jtech/camel-spring:latest .
 Sending build context to Docker daemon 67.59 MB
 Step 1 : FROM jtech/oracle-jdk:latest
  ---> 4e62ea13fed5
@@ -77,7 +77,7 @@ Successfully built f325bfdf7c65
 
 𝜆 docker images -a
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-camel-spring        latest              a1466113def4        30 seconds ago      209.3 MB
+jtech/camel-spring  latest              a1466113def4        30 seconds ago      209.3 MB
 <none>              <none>              70d09a45e06a        30 seconds ago      209.3 MB
 <none>              <none>              9f53fef2eafe        30 seconds ago      209.3 MB
 <none>              <none>              f9d47d23f8b0        31 seconds ago      171.5 MB
@@ -107,8 +107,8 @@ demo_1 |  :: Spring Boot ::        (v1.3.1.RELEASE)
 [source.console]
 ----
 𝜆 docker ps -a
-CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
-a95af25f978e        camel-spring:latest   "/usr/local/jdk/bin/j"   6 minutes ago       Up 7 seconds        0.0.0.0:8080->8080/tcp   camelspring_demo_1
+CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS              PORTS                    NAMES
+a95af25f978e        jtech/camel-spring:latest   "/usr/local/jdk/bin/j"   6 minutes ago       Up 7 seconds        0.0.0.0:8080->8080/tcp   camelspring_demo_1
 
 𝜆 docker exec -it camelspring_demo_1 /bin/sh
 / # ps auxw
