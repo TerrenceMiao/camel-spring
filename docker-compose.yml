@@ -1,0 +1,4 @@
+demo:
+    image: camel-spring:latest
+    ports:
+        - 8080:8080
