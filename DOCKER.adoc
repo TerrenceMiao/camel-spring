@@ -1,0 +1,112 @@
+Build and run Camel / Spring Boot demo in Docker
+================================================
+
+Prerequisites
+-------------
+- Download and install Docker on Mac OS X, https://docs.docker.com/mac/
+
+- Get Docker ready
+[source.console]
+----
+𝜆 docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
+default   -        virtualbox   Stopped                 Unknown
+
+𝜆 docker-machine start default
+Starting "default"...
+(default) Check network to re-create if needed...
+(default) Waiting for an IP...
+Machine "default" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+
+𝜆 docker-machine env default
+set -gx DOCKER_TLS_VERIFY "1";
+set -gx DOCKER_HOST "tcp://192.168.99.100:2376";
+set -gx DOCKER_CERT_PATH "/Users/terrence/.docker/machine/machines/default";
+set -gx DOCKER_MACHINE_NAME "default";
+# Run this command to configure your shell:
+
+𝜆 eval (docker-machine env default)
+----
+
+- Remove ALL Docker’s containers
+[source.console]
+----
+𝜆 docker rm (docker ps -a -q)
+b3ba99e645d1
+511a6f845420
+8f7678bd4c09
+715fdfb94084
+c4a79cd86219
+----
+
+- Remove ALL Docker’s images
+[source.console]
+----
+𝜆 docker rmi (docker images -q
+... ...
+----
+
+- Build Docker image
+[source.console]
+----
+𝜆 docker build -t camel-spring:latest .
+Sending build context to Docker daemon 67.59 MB
+Step 1 : FROM jtech/oracle-jdk:latest
+ ---> 4e62ea13fed5
+Step 2 : MAINTAINER Terrence Miao <TerrenceMiao@users.noreply.github.com>
+ ---> Using cache
+ ---> 24365d64fa3b
+Step 3 : ADD build/libs/camel-spring-1.0-SNAPSHOT.jar camel-spring.jar
+ ---> Using cache
+ ---> f419b3e8821d
+Step 4 : EXPOSE 8080
+ ---> Using cache
+ ---> efdc90318767
+Step 5 : ENTRYPOINT /usr/local/jdk/bin/java -jar camel-spring.jar
+ ---> Running in 47e6ac7f9095
+ ---> 88a290945c7b
+Removing intermediate container 47e6ac7f9095
+Step 6 : CMD
+ ---> Running in 7931609ff61f
+ ---> f325bfdf7c65
+Removing intermediate container 7931609ff61f
+Successfully built f325bfdf7c65
+
+𝜆 docker images -a
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+camel-spring        latest              a1466113def4        30 seconds ago      209.3 MB
+<none>              <none>              70d09a45e06a        30 seconds ago      209.3 MB
+<none>              <none>              9f53fef2eafe        30 seconds ago      209.3 MB
+<none>              <none>              f9d47d23f8b0        31 seconds ago      171.5 MB
+jtech/oracle-jdk    latest              4e62ea13fed5        33 hours ago        171.5 MB
+----
+
+- Run Camel / Spring Boot demo in Docker
+[source.console]
+----
+𝜆 docker-compose up demo
+Recreating camelspring_demo_1
+Attaching to camelspring_demo_1
+demo_1 |
+demo_1 |   .   ____          _            __ _ _
+demo_1 |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+demo_1 | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+demo_1 |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+demo_1 |   '  |____| .__|_| |_|_| |_\__, | / / / /
+demo_1 |  =========|_|==============|___/=/_/_/_/
+demo_1 |  :: Spring Boot ::        (v1.3.1.RELEASE)
+... ...
+----
+
+- Test Camel / Spring Boot demo, go to URL: http://localhost:8080/hawtio/index.html
+
+- Stop Camel / Spring Boot demo in Docker
+[source.console]
+----
+𝜆 docker-compose stop demo
+Stopping camelspring_demo_1 ... done
+----
+
