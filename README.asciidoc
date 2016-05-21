@@ -29,8 +29,11 @@ $ SERVER_PORT=8081 $GRADLE_HOME/bin/gradle bootRun
 
 $ SPRING_PROFILES_ACTIVE=production $GRADLE_HOME/bin/gradle bootRun
 
-$ $JAVA_HOME/bin/java -jar build/distributions/camel-spring-1.0-SNAPSHOT.jar -Dserver.port=8091
+$ $JAVA_HOME/bin/java -jar build/libs/camel-spring-1.0-SNAPSHOT.jar
 ----
+
+- View via Hawtio console, go to URL: http://localhost:8080/hawtio/index.html
+
 
 References
 ----------
