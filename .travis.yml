@@ -1,27 +1,27 @@
+sudo: required
+
 language:
   java
 jdk:
   - oraclejdk8
+services:
+  - docker
 
 before_script:
   - pip install --user codecov
-script:
-  - ./gradlew clean build dist
-
-after_success:
-  - ./gradlew jacocoTestReport
-  - codecov
-
-sudo: required
-services:
-  - docker
 
 install:
   - docker login --email=$DOCKER_HUB_EMAIL --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 
 script:
+  - ./gradlew clean build dist
+  - ls -al build/libs
   - docker build -t $DOCKER_IMAGE_NAME .
   - if [ ! -z "$TRAVIS_TAG" ]; then docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$TRAVIS_TAG; fi && docker push $DOCKER_IMAGE_NAME
+
+after_success:
+  - ./gradlew jacocoTestReport
+  - codecov
 
 env:
   - DOCKER_IMAGE_NAME=jtech/camel-spring
