@@ -125,3 +125,8 @@ PID   USER     TIME   COMMAND
 𝜆 docker-compose stop demo
 Stopping camelspring_demo_1 ... done
 ----
+
+
+Reference
+---------
+- Build, tag and push Docker images using Travis CI, http://suda.pl/build-and-push-docker-images-using-travis/
