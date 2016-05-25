@@ -12,29 +12,32 @@ after_success:
   - ./gradlew jacocoTestReport
   - codecov
 
-install: echo "Installing Camel Spring ..."
 
-before_deploy:
-  - ls -al build/distributions
+## Disable AWS CodeDeploy approach and substitute with Docker solution
 
-deploy:
-  - provider: s3
-    access_key_id: AKIAJUTWO2HAPKEESKUA
-    secret_access_key: &1
-      secure: "fcJNGG4468XYAC5de3RVwUghpVr6Mx/hEeBENqZp/85Od3U7RBLIrEDvE1uX5vwyc6PsT5SUCENmCDQjBbWiYS+uxuxwSDJF8pkcAGWOewxpROzaF+lmlZX7TmbsVRBHrNw387cWJTz+AanxekALMl9+LAqtKFsOI7GqQVdxR4+QGsP3KaAweVRGHDMx5fOVPfAbNBCo7pTRQyle0dDz6DSq05CxaPYRXsBLBm1x14TEO6OQFQtWXxKEjz53zEzhlR8NzKL0zTDOk6JhMer1T0Gys+RenfeROayUjO3ilh1xd6r0/uAQwQMwRpFGs4F6x5R4qJJ2zpnr3KewvmzSHHYBuaSkHGf9vMXeO44gDO/e7FqqO2PMnIMhMpZmIjv0/Q9C9snttPAF5Vab3uL2hr0JgPkxZ6aQ9TFCjuUir7lEec2DdBipK603MKE3VF8YtcS5DLiHMSKJaWU6HrDLn29URgyRsbeu43zJYdHLRgXAXW+B/wcSodzp1/2vKBfBLYXSxkUuK/vIYpOjS341cbQRDiE9w8sfKgyyu+o2ZJkfSnceaCv5JRdPGrgvD6Wy9udbaJtUrRCDF+iCCWwbFkrAZfjzfWACX9V3CwhrtLXIZlaGgzDGzkawD8F7U1BbykGqYYo4mTL3S8RclcUoK4vNyBNF3T2xcp+HUpZeJns="
-    local_dir: build/distributions
-    skip_cleanup: true
-    on: &2
-      repo: TerrenceMiao/camel-spring
-    bucket: camelspring-artefact
-    region: ap-southeast-2
-  - provider: codedeploy
-    access_key_id: AKIAJUTWO2HAPKEESKUA
-    secret_access_key: *1
-    bucket: camelspring-artefact
-    key: camel-spring.zip
-    bundle_type: zip
-    application: CamelSpringDemo
-    deployment_group: DeploymentFleet
-    on: *2
-    region: ap-southeast-2
+#install: echo "Installing Camel Spring ..."
+
+#before_deploy:
+#  - ls -al build/distributions
+
+#deploy:
+#  - provider: s3
+#    access_key_id: AKIAJUTWO2HAPKEESKUA
+#    secret_access_key: &1
+#      secure: "fcJNGG4468XYAC5de3RVwUghpVr6Mx/hEeBENqZp/85Od3U7RBLIrEDvE1uX5vwyc6PsT5SUCENmCDQjBbWiYS+uxuxwSDJF8pkcAGWOewxpROzaF+lmlZX7TmbsVRBHrNw387cWJTz+AanxekALMl9+LAqtKFsOI7GqQVdxR4+QGsP3KaAweVRGHDMx5fOVPfAbNBCo7pTRQyle0dDz6DSq05CxaPYRXsBLBm1x14TEO6OQFQtWXxKEjz53zEzhlR8NzKL0zTDOk6JhMer1T0Gys+RenfeROayUjO3ilh1xd6r0/uAQwQMwRpFGs4F6x5R4qJJ2zpnr3KewvmzSHHYBuaSkHGf9vMXeO44gDO/e7FqqO2PMnIMhMpZmIjv0/Q9C9snttPAF5Vab3uL2hr0JgPkxZ6aQ9TFCjuUir7lEec2DdBipK603MKE3VF8YtcS5DLiHMSKJaWU6HrDLn29URgyRsbeu43zJYdHLRgXAXW+B/wcSodzp1/2vKBfBLYXSxkUuK/vIYpOjS341cbQRDiE9w8sfKgyyu+o2ZJkfSnceaCv5JRdPGrgvD6Wy9udbaJtUrRCDF+iCCWwbFkrAZfjzfWACX9V3CwhrtLXIZlaGgzDGzkawD8F7U1BbykGqYYo4mTL3S8RclcUoK4vNyBNF3T2xcp+HUpZeJns="
+#    local_dir: build/distributions
+#    skip_cleanup: true
+#    on: &2
+#      repo: TerrenceMiao/camel-spring
+#    bucket: camelspring-artefact
+#    region: ap-southeast-2
+#  - provider: codedeploy
+#    access_key_id: AKIAJUTWO2HAPKEESKUA
+#    secret_access_key: *1
+#    bucket: camelspring-artefact
+#    key: camel-spring.zip
+#    bundle_type: zip
+#    application: CamelSpringDemo
+#    deployment_group: DeploymentFleet
+#    on: *2
+#    region: ap-southeast-2
