@@ -12,6 +12,20 @@ after_success:
   - ./gradlew jacocoTestReport
   - codecov
 
+sudo: required
+services:
+  - docker
+
+install:
+  - docker login --email=$DOCKER_HUB_EMAIL --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
+
+script:
+  - docker build -t $DOCKER_IMAGE_NAME .
+  - if [ ! -z "$TRAVIS_TAG" ]; then docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$TRAVIS_TAG; fi && docker push $DOCKER_IMAGE_NAME
+
+env:
+  - DOCKER_IMAGE_NAME=jtech/camel-spring
+
 
 ## Disable AWS CodeDeploy approach and substitute with Docker solution
 
