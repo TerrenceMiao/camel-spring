@@ -84,7 +84,21 @@ jtech/camel-spring  latest              a1466113def4        30 seconds ago      
 jtech/oracle-jdk    latest              4e62ea13fed5        33 hours ago        171.5 MB
 ----
 
-- Run Camel / Spring Boot demo in Docker
+- Run Camel / Spring Boot demo in Docker using "docker" command
+[source.console]
+----
+𝜆 docker run -i -p 8080:8080 jtech/camel-spring
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.3.1.RELEASE)
+----
+
+- Or Run Camel / Spring Boot demo in Docker using "docker compose" command
 [source.console]
 ----
 𝜆 docker-compose up demo
