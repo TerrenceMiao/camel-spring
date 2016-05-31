@@ -3,6 +3,8 @@ package org.paradise;
 import io.hawt.springboot.EnableHawtio;
 import io.hawt.web.AuthenticationFilter;
 import org.apache.camel.spring.boot.FatJarRouter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -11,11 +13,17 @@ import org.springframework.context.annotation.Bean;
 @EnableHawtio
 public class MainSpringBootCamelRouter extends FatJarRouter {
 
+	private static final Logger logger = LoggerFactory.getLogger(MainSpringBootCamelRouter.class);
+
 	public static void main(String[] args) {
 
 		System.setProperty(AuthenticationFilter.HAWTIO_AUTHENTICATION_ENABLED, "false");
 
+		logger.debug("Start Spring Boot Camel Router Service ...");
+
 		SpringApplication.run(MainSpringBootCamelRouter.class, args);
+
+		logger.debug("Happy Spring Boot Camel Router Service ...");
 	}
 
 	@Override
