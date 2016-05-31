@@ -87,7 +87,7 @@ jtech/oracle-jdk    latest              4e62ea13fed5        33 hours ago        
 - Run Camel / Spring Boot demo in Docker using "docker" command
 [source.console]
 ----
-𝜆 docker run -i -p 8080:8080 jtech/camel-spring
+𝜆 docker run -i -v /Users/terrence/clogs:/var/log --name="camel-spring-demo" -p 8080:8080 jtech/camel-spring
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
