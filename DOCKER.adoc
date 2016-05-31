@@ -140,8 +140,14 @@ PID   USER     TIME   COMMAND
 Stopping camelspring_demo_1 ... done
 ----
 
+- Start / Run Sumo Logic Collector for Docker
+[source.console]
+----
+𝜆 docker run -d -v /Users/terrence/clogs:/tmp/clogs --name="sumo-logic-collector" sumologic/collector:latest-file [Access ID] [Access Key]
+----
 
 Reference
 ---------
 - Build, tag and push Docker images using Travis CI, http://suda.pl/build-and-push-docker-images-using-travis/
 - Manage data in containers, https://docs.docker.com/engine/userguide/containers/dockervolumes/
+- Sumo Logic Collector for Docker, https://hub.docker.com/r/sumologic/collector/
