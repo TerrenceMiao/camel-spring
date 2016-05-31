@@ -18,7 +18,8 @@ import static org.junit.Assert.assertTrue;
 @WebIntegrationTest(randomPort = true)
 public class MainSpringBootCamelRouterTests {
 
-	@Autowired CamelContext camelContext;
+	@Autowired
+	CamelContext camelContext;
 
 	@Test
 	public void shouldProduceMessages() throws InterruptedException {
