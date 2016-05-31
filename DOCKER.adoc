@@ -144,3 +144,4 @@ Stopping camelspring_demo_1 ... done
 Reference
 ---------
 - Build, tag and push Docker images using Travis CI, http://suda.pl/build-and-push-docker-images-using-travis/
+- Manage data in containers, https://docs.docker.com/engine/userguide/containers/dockervolumes/
