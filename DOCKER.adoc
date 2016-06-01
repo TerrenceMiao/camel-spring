@@ -87,6 +87,8 @@ jtech/oracle-jdk    latest              4e62ea13fed5        33 hours ago        
 - Run Camel / Spring Boot demo in Docker using "docker" command
 [source.console]
 ----
+## use "/Users/terrence" directory in VOLUMES due to permission Docker requires on Mac OS X
+## check settings in docker-compose.yml file
 𝜆 docker run -i -v /Users/terrence/clogs:/tmp/log --name="camel-spring-demo" -p 8080:8080 jtech/camel-spring
 
   .   ____          _            __ _ _
@@ -143,6 +145,7 @@ Stopping camelspring_demo_1 ... done
 - Start / Run Sumo Logic Collector for Docker
 [source.console]
 ----
+## use "/Users/terrence" directory in VOLUMES due to permission Docker requires on Mac OS X
 𝜆 docker run -d -v /Users/terrence/clogs:/tmp/clogs --name="sumo-logic-collector" sumologic/collector:latest-file [Access ID] [Access Key]
 ----
 
