@@ -1,4 +1,7 @@
 demo:
     image: jtech/camel-spring:latest
+    container_name: camel-spring-demo
     ports:
         - 8080:8080
+    volumes:
+        - /Users/terrence/clogs:/tmp/log
