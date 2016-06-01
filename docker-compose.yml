@@ -4,4 +4,4 @@ demo:
     ports:
         - 8080:8080
     volumes:
-        - /Users/terrence/clogs:/tmp/log
+        - /tmp/clogs:/tmp/log
