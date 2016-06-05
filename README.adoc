@@ -3,6 +3,8 @@ Camel Spring
 ============
 image:https://travis-ci.org/TerrenceMiao/camel-spring.svg?branch=master["Build Status", link="https://travis-ci.org/TerrenceMiao/camel-spring"]
 image:https://codecov.io/github/TerrenceMiao/camel-spring/coverage.svg?branch=master["Code Coverage", link="https://codecov.io/github/TerrenceMiao/camel-spring?branch=master"]
+image:https://img.shields.io/docker/pulls/jtech/camel-spring.svg?maxAge=604800["Docker Pulls", link="https://hub.docker.com/r/jtech/camel-spring/]
+
 
 When Camel meets Spring is a sample demonstrating how *Apache Camel* works with *Spring Boot*, with *hawtio* http://hawt.io/getstarted/,
 a modular web console let you manage, monitor your Java stuff. Check:
