@@ -92,6 +92,10 @@ dependencies {
     // Cyclops React
     compile "com.aol.simplereact:cyclops-react:${dependencyVersionCyclopsReact}"
 
+	// iText
+    compile "com.lowagie:itext:${dependencyVersioniText}"
+
+    // Testing
 	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
