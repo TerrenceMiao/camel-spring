@@ -11,7 +11,6 @@ import com.lowagie.text.pdf.PdfStamper;
 import org.paradise.Constants;
 import org.paradise.model.CustomerProfile;
 import org.paradise.model.PostalAddress;
-import org.paradise.model.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
