@@ -1,9 +1,12 @@
 package org.paradise.controllers;
 
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
 import com.lowagie.text.pdf.AcroFields;
 import com.lowagie.text.pdf.Barcode128;
+import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfFormField;
 import com.lowagie.text.pdf.PdfReader;
@@ -102,6 +105,20 @@ public class PdfController {
 
         // fill form data
         fill(pdfStamper, consumerProfile);
+
+        // Insert a new page
+        int pageNo = 2;
+        pdfStamper.insertPage(pageNo, PageSize.A4);
+
+        // Add some text into new page
+        PdfContentByte pdfContentByte;
+        BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.EMBEDDED);
+
+        pdfContentByte = pdfStamper.getOverContent(pageNo);
+        pdfContentByte.beginText();
+        pdfContentByte.setFontAndSize(baseFont, 18);
+        pdfContentByte.showTextAligned(Element.ALIGN_CENTER, "This Page Intentionally Left Blank", 30, 600, 0);
+        pdfContentByte.endText();
 
         pdfStamper.close();
         pdfReader.close();
