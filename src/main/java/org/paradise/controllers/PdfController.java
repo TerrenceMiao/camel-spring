@@ -9,6 +9,7 @@ import com.lowagie.text.pdf.Barcode128;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfFormField;
+import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import org.paradise.Constants;
@@ -76,8 +77,13 @@ public class PdfController {
     private static final int BARCODE_POSITION_Y = 780;
     private static final int BARCODE_SCALE_PERCENTAGE = 100;
 
+    private static final int PAGE_NO_2 = 2;
+    private static final int PAGE_NO_4 = 4;
+
     @Value("${pdf.template.verification}")
     private String pdfTemplate;
+    @Value("${pdf.sample.a4}")
+    private String pdfSample;
 
     @Autowired
     ServletContext servletContext;
@@ -106,19 +112,31 @@ public class PdfController {
         // fill form data
         fill(pdfStamper, consumerProfile);
 
-        // Insert a new page
-        int pageNo = 2;
-        pdfStamper.insertPage(pageNo, PageSize.A4);
+        // Insert a new page after FIRST page
+        pdfStamper.insertPage(PAGE_NO_2, PageSize.A4);
 
         // Add some text into new page
         PdfContentByte pdfContentByte;
         BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.EMBEDDED);
 
-        pdfContentByte = pdfStamper.getOverContent(pageNo);
+        pdfContentByte = pdfStamper.getOverContent(PAGE_NO_2);
         pdfContentByte.beginText();
         pdfContentByte.setFontAndSize(baseFont, 18);
-        pdfContentByte.showTextAligned(Element.ALIGN_CENTER, "This Page Intentionally Left Blank", 30, 600, 0);
+        pdfContentByte.showTextAligned(Element.ALIGN_LEFT, "This Page Intentionally Left Blank", 180, 400, 0);
         pdfContentByte.endText();
+
+        // Append a PDF file to existing PDF
+        LOG.debug("Append PDF [" + pdfSample + "] to existing template [" + pdfTemplate + "] with userId [" + userId+ "]");
+
+        PdfReader pdfSampleReader = new PdfReader(servletContext.getRealPath(pdfSample));
+
+        // Move to page no. 4
+        pdfStamper.insertPage(PAGE_NO_4, PageSize.A4);
+        pdfContentByte = pdfStamper.getOverContent(PAGE_NO_4);
+
+        // Import only ONE page
+        PdfImportedPage pdfImportedPage = pdfStamper.getImportedPage(pdfSampleReader, 1);
+        pdfContentByte.addTemplate(pdfImportedPage, 0, 0);
 
         pdfStamper.close();
         pdfReader.close();
