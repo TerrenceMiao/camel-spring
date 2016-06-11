@@ -73,9 +73,9 @@ public class PdfController {
     // MyPost version 1.5
     private static final String MYPOST_FORM_VERSION = "A";
 
-    private static final int BARCODE_PAGE_NUMBER = 1;
-    private static final int BLANK_PAGE_NUMBER = 2;
-    private static final int APPENDED_PAGE_NUMBER = 4;
+    private static final int BARCODE_PAGE = 1;
+    private static final int BLANK_PAGE = 2;
+    private static final int APPENDED_PAGE = 4;
 
     private static final int BARCODE_POSITION_X = 440;
     private static final int BARCODE_POSITION_Y = 780;
@@ -114,13 +114,13 @@ public class PdfController {
         fill(pdfStamper, consumerProfile);
 
         // Insert a new page after FIRST page
-        pdfStamper.insertPage(BLANK_PAGE_NUMBER, PageSize.A4);
+        pdfStamper.insertPage(BLANK_PAGE, PageSize.A4);
 
         // Add some text into new page
         PdfContentByte pdfContentByte;
         BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.EMBEDDED);
 
-        pdfContentByte = pdfStamper.getOverContent(BLANK_PAGE_NUMBER);
+        pdfContentByte = pdfStamper.getOverContent(BLANK_PAGE);
         pdfContentByte.beginText();
         pdfContentByte.setFontAndSize(baseFont, 18);
         pdfContentByte.showTextAligned(Element.ALIGN_LEFT, "This Page Intentionally Left Blank", 170, 500, 0);
@@ -132,8 +132,8 @@ public class PdfController {
         PdfReader pdfSampleReader = new PdfReader(servletContext.getRealPath(pdfSample));
 
         // Move to page no. 4
-        pdfStamper.insertPage(APPENDED_PAGE_NUMBER, PageSize.A4);
-        pdfContentByte = pdfStamper.getOverContent(APPENDED_PAGE_NUMBER);
+        pdfStamper.insertPage(APPENDED_PAGE, PageSize.A4);
+        pdfContentByte = pdfStamper.getOverContent(APPENDED_PAGE);
 
         // Import only ONE page
         PdfImportedPage pdfImportedPage = pdfStamper.getImportedPage(pdfSampleReader, 1);
@@ -228,7 +228,7 @@ public class PdfController {
     private void generateBarcode(PdfStamper pdfStamper, String userId) throws DocumentException {
 
         // add barcode on the first page
-        PdfContentByte cb = pdfStamper.getOverContent(BARCODE_PAGE_NUMBER);
+        PdfContentByte cb = pdfStamper.getOverContent(BARCODE_PAGE);
 
         // barcode format 128C
         Barcode128 code128 = new Barcode128();
@@ -262,11 +262,11 @@ public class PdfController {
     private void generateQRCode(PdfStamper pdfStamper) throws DocumentException {
 
         // add barcode on the first page
-        PdfContentByte pdfContentByte = pdfStamper.getOverContent(APPENDED_PAGE_NUMBER);
+        PdfContentByte pdfContentByte = pdfStamper.getOverContent(APPENDED_PAGE);
 
         BarcodeQRCode qrcode = new BarcodeQRCode("http://www.vendian.org/mncharity/dir3/paper_rulers/", 1, 1, null);
         Image qrcodeImage = qrcode.getImage();
-        qrcodeImage.setAbsolutePosition(400,600);
+        qrcodeImage.setAbsolutePosition(360,500);
         qrcodeImage.scalePercent(400);
         pdfContentByte.addImage(qrcodeImage);
     }
