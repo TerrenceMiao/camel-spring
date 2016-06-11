@@ -25,13 +25,13 @@ package org.paradise.itext.qrcode;
  */
 public final class ReedSolomonException extends Exception {
 
-  /**
-   * Serial version UID.
-   */
-   private static final long serialVersionUID = 2168232776886684292L;
+    /**
+     * Serial version UID.
+     */
+    private static final long serialVersionUID = 2168232776886684292L;
 
-public ReedSolomonException(String message) {
-    super(message);
-  }
+    public ReedSolomonException(String message) {
+        super(message);
+    }
 
 }

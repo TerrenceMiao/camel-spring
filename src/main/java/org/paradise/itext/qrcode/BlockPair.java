@@ -15,25 +15,26 @@
  */
 
 package org.paradise.itext.qrcode;
+
 /**
  * @since 5.0.2
  */
-final class BlockPair {
+public final class BlockPair {
 
-  private final ByteArray dataBytes;
-  private final ByteArray errorCorrectionBytes;
+    private final ByteArray dataBytes;
+    private final ByteArray errorCorrectionBytes;
 
-  BlockPair(ByteArray data, ByteArray errorCorrection) {
-    dataBytes = data;
-    errorCorrectionBytes = errorCorrection;
-  }
+    BlockPair(ByteArray data, ByteArray errorCorrection) {
+        dataBytes = data;
+        errorCorrectionBytes = errorCorrection;
+    }
 
-  public ByteArray getDataBytes() {
-    return dataBytes;
-  }
+    public ByteArray getDataBytes() {
+        return dataBytes;
+    }
 
-  public ByteArray getErrorCorrectionBytes() {
-    return errorCorrectionBytes;
-  }
+    public ByteArray getErrorCorrectionBytes() {
+        return errorCorrectionBytes;
+    }
 
 }

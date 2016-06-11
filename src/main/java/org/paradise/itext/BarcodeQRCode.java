@@ -41,8 +41,7 @@ public class BarcodeQRCode {
         try {
             QRCodeWriter qc = new QRCodeWriter();
             bm = qc.encode(content, width, height, hints);
-        }
-        catch (WriterException ex) {
+        } catch (WriterException ex) {
             throw new ExceptionConverter(ex);
         }
     }
@@ -54,6 +53,7 @@ public class BarcodeQRCode {
         int stride = (width + 7) / 8;
         byte[] b = new byte[stride * height];
         byte[][] mt = bm.getArray();
+
         for (int y = 0; y < height; ++y) {
             byte[] line = mt[y];
             for (int x = 0; x < width; ++x) {
@@ -77,8 +77,10 @@ public class BarcodeQRCode {
 
         byte[] b = getBitMatrix();
         byte g4[] = CCITTG4Encoder.compress(b, bm.getWidth(), bm.getHeight());
+
         return Image.getInstance(bm.getWidth(), bm.getHeight(), false, Image.CCITTG4, Image.CCITT_BLACKIS1, g4, null);
     }
+
 
     // AWT related methods (remove this if you port to Android / GAE)
 
@@ -93,12 +95,12 @@ public class BarcodeQRCode {
 
         int f = foreground.getRGB();
         int g = background.getRGB();
-        java.awt.Canvas canvas = new java.awt.Canvas();
 
         int width = bm.getWidth();
         int height = bm.getHeight();
         int pix[] = new int[width * height];
         byte[][] mt = bm.getArray();
+
         for (int y = 0; y < height; ++y) {
             byte[] line = mt[y];
             for (int x = 0; x < width; ++x) {
@@ -106,10 +108,18 @@ public class BarcodeQRCode {
             }
         }
 
+        java.awt.Canvas canvas = new java.awt.Canvas();
         java.awt.Image img = canvas.createImage(new java.awt.image.MemoryImageSource(width, height, pix, 0, width));
+
         return img;
     }
 
+    /**
+     *
+     * @param cb
+     * @param foreground
+     * @param moduleSide
+     */
     public void placeBarcode(PdfContentByte cb, Color foreground, float moduleSide) {
 
         int width = bm.getWidth();
@@ -126,6 +136,7 @@ public class BarcodeQRCode {
                 }
             }
         }
+
         cb.fill();
     }
 
