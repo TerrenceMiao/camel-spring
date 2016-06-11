@@ -13,6 +13,7 @@ import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import org.paradise.Constants;
+import org.paradise.itext.BarcodeQRCode;
 import org.paradise.model.CustomerProfile;
 import org.paradise.model.PostalAddress;
 import org.slf4j.Logger;
@@ -73,12 +74,12 @@ public class PdfController {
     private static final String MYPOST_FORM_VERSION = "A";
 
     private static final int BARCODE_PAGE_NUMBER = 1;
+    private static final int BLANK_PAGE_NUMBER = 2;
+    private static final int APPENDED_PAGE_NUMBER = 4;
+
     private static final int BARCODE_POSITION_X = 440;
     private static final int BARCODE_POSITION_Y = 780;
     private static final int BARCODE_SCALE_PERCENTAGE = 100;
-
-    private static final int PAGE_NO_2 = 2;
-    private static final int PAGE_NO_4 = 4;
 
     @Value("${pdf.template.verification}")
     private String pdfTemplate;
@@ -113,16 +114,16 @@ public class PdfController {
         fill(pdfStamper, consumerProfile);
 
         // Insert a new page after FIRST page
-        pdfStamper.insertPage(PAGE_NO_2, PageSize.A4);
+        pdfStamper.insertPage(BLANK_PAGE_NUMBER, PageSize.A4);
 
         // Add some text into new page
         PdfContentByte pdfContentByte;
         BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.EMBEDDED);
 
-        pdfContentByte = pdfStamper.getOverContent(PAGE_NO_2);
+        pdfContentByte = pdfStamper.getOverContent(BLANK_PAGE_NUMBER);
         pdfContentByte.beginText();
         pdfContentByte.setFontAndSize(baseFont, 18);
-        pdfContentByte.showTextAligned(Element.ALIGN_LEFT, "This Page Intentionally Left Blank", 180, 400, 0);
+        pdfContentByte.showTextAligned(Element.ALIGN_LEFT, "This Page Intentionally Left Blank", 170, 500, 0);
         pdfContentByte.endText();
 
         // Append a PDF file to existing PDF
@@ -131,12 +132,15 @@ public class PdfController {
         PdfReader pdfSampleReader = new PdfReader(servletContext.getRealPath(pdfSample));
 
         // Move to page no. 4
-        pdfStamper.insertPage(PAGE_NO_4, PageSize.A4);
-        pdfContentByte = pdfStamper.getOverContent(PAGE_NO_4);
+        pdfStamper.insertPage(APPENDED_PAGE_NUMBER, PageSize.A4);
+        pdfContentByte = pdfStamper.getOverContent(APPENDED_PAGE_NUMBER);
 
         // Import only ONE page
         PdfImportedPage pdfImportedPage = pdfStamper.getImportedPage(pdfSampleReader, 1);
         pdfContentByte.addTemplate(pdfImportedPage, 0, 0);
+
+        // create a QR Code on the page
+        generateQRCode(pdfStamper);
 
         pdfStamper.close();
         pdfReader.close();
@@ -248,6 +252,25 @@ public class PdfController {
         // add barcode image into PDF template
         cb.addImage(code128Image);
     }
+
+    /**
+     * Generate a QR code including URL on the page
+     * 
+     * @param pdfStamper
+     * @throws DocumentException
+     */
+    private void generateQRCode(PdfStamper pdfStamper) throws DocumentException {
+
+        // add barcode on the first page
+        PdfContentByte pdfContentByte = pdfStamper.getOverContent(APPENDED_PAGE_NUMBER);
+
+        BarcodeQRCode qrcode = new BarcodeQRCode("http://www.vendian.org/mncharity/dir3/paper_rulers/", 1, 1, null);
+        Image qrcodeImage = qrcode.getImage();
+        qrcodeImage.setAbsolutePosition(400,600);
+        qrcodeImage.scalePercent(400);
+        pdfContentByte.addImage(qrcodeImage);
+    }
+
 
     /**
      * Fill data into interactive form input fields
