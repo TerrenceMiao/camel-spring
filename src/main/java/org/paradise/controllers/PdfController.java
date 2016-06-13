@@ -264,10 +264,10 @@ public class PdfController {
         // add barcode on the first page
         PdfContentByte pdfContentByte = pdfStamper.getOverContent(APPENDED_PAGE);
 
-        BarcodeQRCode qrcode = new BarcodeQRCode("http://www.vendian.org/mncharity/dir3/paper_rulers/", 1, 1, null);
+        BarcodeQRCode qrcode = new BarcodeQRCode("http://www.vendian.org/mncharity/dir3/paper_rulers/", 200, 200, null);
         Image qrcodeImage = qrcode.getImage();
         qrcodeImage.setAbsolutePosition(360,500);
-        qrcodeImage.scalePercent(400);
+        qrcodeImage.scalePercent(100);
         pdfContentByte.addImage(qrcodeImage);
     }
 
