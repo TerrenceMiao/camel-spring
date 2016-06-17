@@ -1,7 +1,24 @@
-demo:
-    image: jtech/camel-spring:latest
-    container_name: camel-spring-demo
-    ports:
-        - 8080:8080
-    volumes:
-        - /tmp/clogs:/tmp/log
+version: '2'
+
+services:
+    activemq:
+        image: jtech/activemq:latest
+        container_name: activemq-container
+        ports:
+            - "1883"
+            - "5672"
+            - "8161:8161"
+            - "61613"
+            - "61614"
+            - "61616"
+
+    camel-spring:
+        image: jtech/camel-spring:latest
+        container_name: camel-spring-container
+        ports:
+            - 8080:8080
+        volumes:
+            - /tmp/clogs:/tmp/log
+        depends_on:
+            - activemq # wait for activemq to be started, not for ready
+
