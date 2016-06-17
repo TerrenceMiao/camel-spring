@@ -1,17 +1,19 @@
 activemq:
     image: jtech/activemq:latest
     container_name: activemq-container
+    mem_limit: 256000000
     ports:
-        - "1883"
-        - "5672"
-        - "8161:8161"
-        - "61613"
-        - "61614"
-        - "61616"
+        - 1883
+        - 5672
+        - 8161:8161
+        - 61613
+        - 61614
+        - 61616
 
 camel-spring:
     image: jtech/camel-spring:latest
     container_name: camel-spring-container
+    mem_limit: 256000000
     ports:
         - 8080:8080
     volumes:
