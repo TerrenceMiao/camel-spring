@@ -2,11 +2,14 @@ package org.paradise.controllers;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
+import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.AcroFields;
 import com.lowagie.text.pdf.Barcode128;
 import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfFormField;
 import com.lowagie.text.pdf.PdfImportedPage;
@@ -81,10 +84,17 @@ public class PdfController {
     private static final int BARCODE_POSITION_Y = 780;
     private static final int BARCODE_SCALE_PERCENTAGE = 100;
 
+    public static final String SIMPLIFIED_CHINESE = "工欲善其事，必先利其器。";
+    public static final String TRADITIONAL_CHINESE = "故人西辭黃鶴樓，煙花三月下揚州。孤帆遠影碧空盡，唯見長江天際流。";
+    public static final String JAPANESE = "閑さや岩にしみ入る蝉の声";
+    public static final String KOREAN = "피할수없다면즐겨라";
+
     @Value("${pdf.template.verification}")
     private String pdfTemplate;
     @Value("${pdf.sample.a4}")
     private String pdfSample;
+    @Value("${utf8.font}")
+    private String utf8Font;
 
     @Autowired
     ServletContext servletContext;
@@ -123,8 +133,32 @@ public class PdfController {
         pdfContentByte = pdfStamper.getOverContent(BLANK_PAGE);
         pdfContentByte.beginText();
         pdfContentByte.setFontAndSize(baseFont, 18);
-        pdfContentByte.showTextAligned(Element.ALIGN_LEFT, "This Page Intentionally Left Blank", 170, 500, 0);
+        pdfContentByte.showTextAligned(Element.ALIGN_LEFT, "This Page Intentionally Left Blank but it's not.", 120, 500, 0);
         pdfContentByte.endText();
+
+        // Display Traditional / Simplified Chinese, Japanese, Korean characters
+        baseFont = BaseFont.createFont(utf8Font, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        Font font = new Font(baseFont, 18);
+
+        ColumnText columnText = new ColumnText(pdfContentByte);
+        columnText.setSimpleColumn(120f, 100f, 400f, 700f);
+        columnText.addElement(new Paragraph(SIMPLIFIED_CHINESE, font));
+        columnText.go();
+
+        columnText = new ColumnText(pdfContentByte);
+        columnText.setSimpleColumn(120f, 100f, 420f, 400f);
+        columnText.addElement(new Paragraph(TRADITIONAL_CHINESE, font));
+        columnText.go();
+
+        columnText = new ColumnText(pdfContentByte);
+        columnText.setSimpleColumn(120f, 100f, 400f, 300f);
+        columnText.addElement(new Paragraph(JAPANESE, font));
+        columnText.go();
+
+        columnText = new ColumnText(pdfContentByte);
+        columnText.setSimpleColumn(120f, 100f, 400f, 200f);
+        columnText.addElement(new Paragraph(KOREAN, font));
+        columnText.go();
 
         // Append a PDF file to existing PDF
         LOG.debug("Append PDF [" + pdfSample + "] to existing template [" + pdfTemplate + "] with userId [" + userId+ "]");
