@@ -8,14 +8,22 @@ buildscript {
 	}
 
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${dependencyManagementVersion}")
 	}
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: "io.spring.dependency-management"
 apply plugin: 'jacoco'
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-sleuth:${springCloudSleuthVersion}")
+    }
+}
 
 jar {
     baseName = 'camel-spring'
@@ -70,13 +78,14 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter:${springBootVersion}")
 	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 	compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+    compile("org.springframework.cloud:spring-cloud-starter-sleuth")
 
     // dependencies error:
     // 'dependencies.dependency.systemPath' for com.sun:tools:jar must specify an absolute path but is
     // /home/tclement/plf-release-tools/tools/jdk1.7.0_67/jre/../lib/tools.jar in org.crashub:crash.shell:1.3.2
 //	compile("org.springframework.boot:spring-boot-starter-remote-shell:${springBootVersion}")
-//    compile files("${System.properties['java.home']}/../lib/tools.jar")
-//    compile(files(((URLClassLoader) ToolProvider.getSystemToolClassLoader()).getURLs()))
+//  compile files("${System.properties['java.home']}/../lib/tools.jar")
+//  compile(files(((URLClassLoader) ToolProvider.getSystemToolClassLoader()).getURLs()))
 
 	// Apache Camel
 	compile("org.apache.camel:camel-spring-boot:${camelVersion}")
