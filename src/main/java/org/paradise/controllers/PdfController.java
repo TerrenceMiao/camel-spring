@@ -146,6 +146,12 @@ public class PdfController {
         columnText.go();
 
         columnText = new ColumnText(pdfContentByte);
+        columnText.setSimpleColumn(120f, 100f, 400f, 600f);
+        columnText.addElement(
+                new Paragraph("Consumer Name: " + consumerProfile.getFirstName() + " " +  consumerProfile.getLastName(), font));
+        columnText.go();
+
+        columnText = new ColumnText(pdfContentByte);
         columnText.setSimpleColumn(120f, 100f, 420f, 400f);
         columnText.addElement(new Paragraph(TRADITIONAL_CHINESE, font));
         columnText.go();
