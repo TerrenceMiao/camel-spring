@@ -78,7 +78,10 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter:${springBootVersion}")
 	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 	compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+
+    // Spring Cloud
     compile("org.springframework.cloud:spring-cloud-starter-sleuth")
+    compile("org.springframework.cloud:spring-cloud-sleuth-zipkin:${springCloudSleuthZipkinVersion}")
 
     // dependencies error:
     // 'dependencies.dependency.systemPath' for com.sun:tools:jar must specify an absolute path but is
