@@ -22,6 +22,7 @@ apply plugin: 'jacoco'
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-sleuth:${springCloudSleuthVersion}")
+        mavenBom("org.springframework.cloud:spring-cloud-netflix:${springCloudNetflixVersion}")
     }
 }
 
@@ -79,8 +80,13 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 	compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
 
-    // Spring Cloud
+    // Spring Cloud Sleuth
     compile("org.springframework.cloud:spring-cloud-starter-sleuth")
+    // Spring Cloud Netflix
+    compile("org.springframework.cloud:spring-cloud-starter-hystrix")
+    compile("org.springframework.cloud:spring-cloud-starter-hystrix-dashboard")
+
+    // Zipkin client
     compile("org.springframework.cloud:spring-cloud-sleuth-zipkin:${springCloudSleuthZipkinVersion}")
 
     // dependencies error:
