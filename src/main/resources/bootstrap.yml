@@ -1,0 +1,12 @@
+spring:
+  application.name: camel-spring
+  cloud.config.uri: http://localhost:9090
+
+## Logging
+logging.file: /tmp/log/camel-spring.log
+
+## PDF properties
+pdf:
+  template.verification: /templates/verification.pdf
+  sample.a4: /templates/ruler_foot_A4.pdf
+  utf8.font: fonts/NotoSansCJKsc-Regular.otf

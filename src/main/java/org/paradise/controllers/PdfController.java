@@ -93,7 +93,7 @@ public class PdfController {
     private String pdfTemplate;
     @Value("${pdf.sample.a4}")
     private String pdfSample;
-    @Value("${utf8.font}")
+    @Value("${pdf.utf8.font}")
     private String utf8Font;
 
     @Autowired
