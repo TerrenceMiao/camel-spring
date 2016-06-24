@@ -68,7 +68,7 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
 	@Bean
 	String myBean() {
 
-		return "This is a beautiful Spring Bean!";
+		return "What a beautiful Spring Bean!";
 	}
 
 }
