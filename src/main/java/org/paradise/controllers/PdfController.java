@@ -15,6 +15,7 @@ import com.lowagie.text.pdf.PdfFormField;
 import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.paradise.Constants;
 import org.paradise.itext.BarcodeQRCode;
 import org.paradise.model.CustomerProfile;
@@ -100,6 +101,7 @@ public class PdfController {
     ServletContext servletContext;
 
 
+    @HystrixCommand(fallbackMethod = "defaultGetVerificationPdfError")
     @RequestMapping(value = Constants.PDF_PATH + "/verification/{userId}", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
     public void getVerificationPdf(HttpServletResponse response,
                                    @RequestBody @Valid CustomerProfile consumerProfile, @PathVariable("userId") String userId)
@@ -187,6 +189,9 @@ public class PdfController {
 
         // Flushes output stream and forces buffered output bytes to be written out
         response.getOutputStream().flush();
+    }
+
+    public void defaultGetVerificationPdfError(HttpServletResponse response, CustomerProfile consumerProfile, String userId) {
     }
 
     /**

@@ -1,6 +1,19 @@
 buildscript {
 
 	ext {
+        dependencyManagementVersion = '0.5.2.RELEASE'
+        springBootVersion = '1.3.5.RELEASE'
+        springCloudSleuthVersion = '1.0.1.RELEASE'
+        springCloudNetflixVersion = '1.1.2.RELEASE'
+        springCloudSleuthZipkinVersion = '1.0.1.RELEASE'
+        camelVersion = '2.16.1'
+        jolokiaVersion = '1.3.2'
+        dependencyVersionHawtio = '1.4.59'
+        dependencyVersionCyclopsReact = '1.0.0-RC4'
+        dependencyVersioniText = '2.1.7'
+        dependencyVersionJacoco = '0.7.7.201606060606'
+        netflixHystrixAMQPVersion = '1.0.7.RELEASE'
+        brixtonVersion = 'Brixton.SR1'
 	}
 
 	repositories {
@@ -23,6 +36,7 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-sleuth:${springCloudSleuthVersion}")
         mavenBom("org.springframework.cloud:spring-cloud-netflix:${springCloudNetflixVersion}")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${brixtonVersion}")
     }
 }
 
@@ -80,11 +94,16 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 	compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
 
+    // Spring Cloud
+    compile("org.springframework.cloud:spring-cloud-starter-config")
+    compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    compile("org.springframework.cloud:spring-cloud-starter-feign")
+    compile("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     // Spring Cloud Sleuth
     compile("org.springframework.cloud:spring-cloud-starter-sleuth")
     // Spring Cloud Netflix
     compile("org.springframework.cloud:spring-cloud-starter-hystrix")
-    compile("org.springframework.cloud:spring-cloud-starter-hystrix-dashboard")
+    compile("org.springframework.cloud:spring-cloud-netflix-hystrix-amqp:${netflixHystrixAMQPVersion}")
 
     // Zipkin client
     compile("org.springframework.cloud:spring-cloud-sleuth-zipkin:${springCloudSleuthZipkinVersion}")
