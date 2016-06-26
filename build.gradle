@@ -84,7 +84,6 @@ dependencies {
     compile("org.springframework.cloud:spring-cloud-starter-sleuth")
     // Spring Cloud Netflix
     compile("org.springframework.cloud:spring-cloud-starter-hystrix")
-    compile("org.springframework.cloud:spring-cloud-starter-hystrix-dashboard")
 
     // Zipkin client
     compile("org.springframework.cloud:spring-cloud-sleuth-zipkin:${springCloudSleuthZipkinVersion}")
