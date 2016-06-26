@@ -12,12 +12,16 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableHawtio
 @EnableEurekaClient
 @EnableFeignClients
 @EnableCircuitBreaker
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableAsync
 public class MainSpringBootCamelRouter extends FatJarRouter {
 
 	private static final Logger logger = LoggerFactory.getLogger(MainSpringBootCamelRouter.class);
