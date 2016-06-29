@@ -2,6 +2,7 @@ buildscript {
 
 	ext {
         logstashLogbackEncoderVersion = '4.7'
+        logbackVersion = '1.1.6'
     }
 
 	repositories {
@@ -77,32 +78,32 @@ springBoot {
 
 dependencies {
 	// Spring Boot
-	compile("org.springframework.boot:spring-boot-starter:${springBootVersion}")
-	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
-	compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+	compile "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+	compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+	compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
 
     // Spring Cloud Sleuth
-    compile("org.springframework.cloud:spring-cloud-starter-sleuth")
+    compile "org.springframework.cloud:spring-cloud-starter-sleuth"
     // Spring Cloud Netflix
-    compile("org.springframework.cloud:spring-cloud-starter-hystrix")
+    compile "org.springframework.cloud:spring-cloud-starter-hystrix"
 
     // Zipkin client
-    compile("org.springframework.cloud:spring-cloud-sleuth-zipkin:${springCloudSleuthZipkinVersion}")
+    compile "org.springframework.cloud:spring-cloud-sleuth-zipkin:${springCloudSleuthZipkinVersion}"
 
     // dependencies error:
     // 'dependencies.dependency.systemPath' for com.sun:tools:jar must specify an absolute path but is
     // /home/tclement/plf-release-tools/tools/jdk1.7.0_67/jre/../lib/tools.jar in org.crashub:crash.shell:1.3.2
-//	compile("org.springframework.boot:spring-boot-starter-remote-shell:${springBootVersion}")
+//	compile "org.springframework.boot:spring-boot-starter-remote-shell:${springBootVersion}"
 //  compile files("${System.properties['java.home']}/../lib/tools.jar")
 //  compile(files(((URLClassLoader) ToolProvider.getSystemToolClassLoader()).getURLs()))
 
 	// Apache Camel
-	compile("org.apache.camel:camel-spring-boot:${camelVersion}")
+	compile "org.apache.camel:camel-spring-boot:${camelVersion}"
     // Failed to find this dependency
-//	compile("org.apache.camel:camel-commands-spring-boot:${camelVersion}")
+//	compile "org.apache.camel:camel-commands-spring-boot:${camelVersion}"
 
 	// Jolokia
-	compile("org.jolokia:jolokia-core:${jolokiaVersion}")
+	compile "org.jolokia:jolokia-core:${jolokiaVersion}"
 
 	// Hawtio for Spring Boot
 	compile "io.hawt:hawtio-springboot:${dependencyVersionHawtio}"
@@ -113,11 +114,18 @@ dependencies {
 	// iText
     compile "com.lowagie:itext:${dependencyVersioniText}"
 
+    // Logback
+    // Turn back to version 1.16 due to defect http://jira.qos.ch/browse/LOGBACK-1158
+    //  Caused by: java.lang.IllegalStateException: Logback configuration error detected:
+    //  ERROR in ch.qos.logback.core.joran.action.NestedBasicPropertyIA - Unexpected aggregationType AS_BASIC_PROPERTY_COLLECTION
+    compile "ch.qos.logback:logback-core:${logbackVersion}"
+    compile "ch.qos.logback:logback-classic:${logbackVersion}"
+
     // LogStash Logback Encoder
     compile "net.logstash.logback:logstash-logback-encoder:${logstashLogbackEncoderVersion}"
 
     // Testing
-	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+	testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 }
 
 task wrapper(type: Wrapper) {
