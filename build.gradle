@@ -1,7 +1,8 @@
 buildscript {
 
 	ext {
-	}
+        logstashLogbackEncoderVersion = '4.7'
+    }
 
 	repositories {
 		mavenCentral()
@@ -111,6 +112,9 @@ dependencies {
 
 	// iText
     compile "com.lowagie:itext:${dependencyVersioniText}"
+
+    // LogStash Logback Encoder
+    compile "net.logstash.logback:logstash-logback-encoder:${logstashLogbackEncoderVersion}"
 
     // Testing
 	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
