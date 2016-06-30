@@ -87,6 +87,9 @@ output {
 𝜆 env spring.profiles.active=production $GRADLE_HOME/bin/gradle bootRun
 ----
 
+image::Kibana{sp}Console.png[Kibana Console]
+
+
 References
 ----------
 - Start Spring Boot project with Spring Initializer, _https://start.spring.io/_
