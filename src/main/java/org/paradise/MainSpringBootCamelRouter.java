@@ -47,7 +47,7 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
 	@Override
 	public void configure() {
 
-		from("timer:trigger")
+		from("timer:trigger?fixedRate=true&period=20000")
 				// hard code break point
 				.process(exchange -> System.out.println())
 				// Add the following line before a bean, for example:
