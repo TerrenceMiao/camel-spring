@@ -57,7 +57,7 @@ $ $GRADLE_HOME/bin/gradle bootRun
 ----
 Then in Camel Spring to produce a PDF file, and go to URL: http://localhost:9411/
 
-image::Zipkin{sp}Tracing{sp}cosole.png[Zipkin Tracing console]
+image::Zipkin{sp}Tracing{sp}console.png[Zipkin Tracing console]
 
 
 Logging with ELK (Elastic, Logstash and Kibana)
