@@ -60,6 +60,33 @@ Then in Camel Spring to produce a PDF file, and go to URL: http://localhost:9411
 image::Zipkin{sp}Tracing{sp}cosole.png[Zipkin Tracing console]
 
 
+Logging with ELK (Elastic, Logstash and Kibana)
+-----------------------------------------------
+Install and Run Elastic, Logstash and Kibana
+[source.console]
+----
+𝜆 /usr/local/elasticsearch/bin/elasticsearch
+
+𝜆 /usr/local/kibana/bin/kibana
+
+𝜆 cat /usr/local/logstash/logstash-json.conf
+input {
+    tcp {
+        port => 4560
+        codec => json_lines
+    }
+}
+
+output {
+    elasticsearch { hosts => ["localhost:9200"] }
+    stdout { codec => rubydebug }
+}
+
+𝜆 /usr/local/logstash/bin/logstash -f /usr/local/logstash/logstash-json.conf
+
+𝜆 env spring.profiles.active=production $GRADLE_HOME/bin/gradle bootRun
+----
+
 References
 ----------
 - Start Spring Boot project with Spring Initializer, _https://start.spring.io/_
