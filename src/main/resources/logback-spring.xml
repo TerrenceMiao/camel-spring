@@ -2,11 +2,27 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml" />
 
-    <logger name="org.paradise" level="INFO">
-        <appender-ref ref="FILE" />
-    </logger>
+    <!-- Logstash -->
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:4560</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
 
     <springProfile name="default">
-        <logger name="org.paradise" level="DEBUG" />
+        <logger name="org.paradise" level="DEBUG">
+            <appender-ref ref="FILE" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="production">
+        <logger name="org.paradise" level="DEBUG">
+            <appender-ref ref="logstash" />
+        </logger>
+        <logger name="org.apache.camel" level="INFO">
+            <appender-ref ref="logstash" />
+        </logger>
+        <logger name="out" level="DEBUG">
+            <appender-ref ref="logstash" />
+        </logger>
     </springProfile>
 </configuration>
