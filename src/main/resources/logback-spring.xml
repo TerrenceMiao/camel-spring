@@ -2,7 +2,7 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml" />
 
-    <!-- Logstash -->
+    <!-- Logstash Logback appender with Encoder -->
     <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <destination>localhost:4560</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
@@ -14,7 +14,8 @@
         </logger>
     </springProfile>
 
-    <springProfile name="production">
+    <!-- Elastic search, Logstash, Kibana logging aggregation, index and search -->
+    <springProfile name="elk">
         <logger name="org.paradise" level="DEBUG">
             <appender-ref ref="logstash" />
         </logger>
