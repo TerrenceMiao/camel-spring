@@ -30,7 +30,7 @@ $ $GRADLE_HOME/bin/gradle bootRun --debug-jvm
 
 $ SERVER_PORT=8081 $GRADLE_HOME/bin/gradle bootRun
 
-$ SPRING_PROFILES_ACTIVE=production $GRADLE_HOME/bin/gradle bootRun
+$ SPRING_PROFILES_ACTIVE=default $GRADLE_HOME/bin/gradle bootRun
 
 $ $JAVA_HOME/bin/java -jar build/libs/camel-spring-1.0-SNAPSHOT.jar
 ----
@@ -40,7 +40,7 @@ In Fish shell, run like
 ----
 𝜆 env server.port=8081 $GRADLE_HOME/bin/gradle bootRun
 
-𝜆 env spring.profiles.active=production $GRADLE_HOME/bin/gradle bootRun
+𝜆 env spring.profiles.active=elk $GRADLE_HOME/bin/gradle bootRun
 ----
 
 - View via Hawtio console, go to URL: http://localhost:8080/hawtio/index.html
