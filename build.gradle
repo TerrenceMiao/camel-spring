@@ -3,6 +3,7 @@ buildscript {
 	ext {
         logstashLogbackEncoderVersion = '4.7'
         logbackVersion = '1.1.6'
+        jacksonVersion = '2.8.0'
     }
 
 	repositories {
@@ -101,6 +102,12 @@ dependencies {
 	compile "org.apache.camel:camel-spring-boot:${camelVersion}"
     // Failed to find this dependency
 //	compile "org.apache.camel:camel-commands-spring-boot:${camelVersion}"
+
+    // FastXML Jackson
+    compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    compile "com.fasterxml.jackson.module:jackson-module-paranamer:${jacksonVersion}"
 
 	// Jolokia
 	compile "org.jolokia:jolokia-core:${jolokiaVersion}"
