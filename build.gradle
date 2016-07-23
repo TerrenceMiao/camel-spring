@@ -102,6 +102,8 @@ dependencies {
 	compile "org.apache.camel:camel-spring-boot:${camelVersion}"
     // Failed to find this dependency
 //	compile "org.apache.camel:camel-commands-spring-boot:${camelVersion}"
+    // Camel Redis
+    compile "org.apache.camel:camel-spring-redis:${camelVersion}"
 
     // FastXML Jackson
     compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
