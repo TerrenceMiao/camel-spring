@@ -5,7 +5,7 @@ import io.hawt.web.AuthenticationFilter;
 import org.apache.camel.Processor;
 import org.apache.camel.component.redis.RedisConstants;
 import org.apache.camel.spring.boot.FatJarRouter;
-import org.paradise.service.RedisServiceBean;
+import org.paradise.service.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
     private static final Processor enrichExchangeBody = exchange -> exchange.getIn().setBody("[" + exchange.getIn().getBody().toString() + "]");
 
     @Autowired
-    RedisServiceBean redisServiceBean;
+    RedisService redisService;
 
 	@Bean
 	public AlwaysSampler defaultSampler() {
@@ -83,25 +83,26 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
                 .onException(JedisConnectionException.class)
                     .handled(true)
                     .transform().simple("${exception.message}")
-                    .bean(redisServiceBean, "handleException(${body})")
+                    .bean(redisService, "handleException(${body})")
                     .to("mock:error")
                 .end()
                 // publish and subscribe
                 .setHeader(RedisConstants.CHANNEL, constant("camelChannel"))
                 .setHeader(RedisConstants.COMMAND, constant("PUBLISH"))
-                .setHeader(RedisConstants.MESSAGE, constant("This is hello message to Redis from Camel"))
+                .setHeader(RedisConstants.MESSAGE, constant("This is hello message from Camel to Redis"))
                 .to("spring-redis://localhost:6379")
                 // key / value caching
-                .setHeader(RedisConstants.COMMAND, constant("SET"))
-                .setHeader(RedisConstants.KEY, constant("camelKey"))
-                .setHeader(RedisConstants.VALUE, constant("camelValue"))
-                .to("spring-redis://localhost:6379");
+                .setHeader(RedisConstants.COMMAND, constant("HSET"))
+                .setHeader(RedisConstants.KEY, constant(Constants.REDIS_KEY))
+                .setHeader(RedisConstants.FIELD, constant(Constants.REDIS_FIELD))
+                .setHeader(RedisConstants.VALUE, constant("This is Redis HSET value"))
+                .to("spring-redis://localhost:6379?redisTemplate=#redisTemplate");
 
         // Camel Redis subscribe
-        from("spring-redis://localhost:6379?command=SUBSCRIBE&channels=camelChannel")
+        from("spring-redis://localhost:6379?command=SUBSCRIBE&channels=camelChannel&redisTemplate=#redisTemplate")
                 .routeId("Redis subscribe")
                 .process(enrichExchangeBody)
-                .bean(redisServiceBean, "getMessage(${body})")
+                .bean(redisService, "getMessage(${body})")
                 .to("mock:result");
 	}
 
