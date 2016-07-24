@@ -79,7 +79,7 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
 
         // Camel Redis publish
         from("timer://redis?period=20s")
-                .routeId("Redis publish")
+                .routeId("Redis publisher")
                 .onException(JedisConnectionException.class)
                     .handled(true)
                     .transform().simple("${exception.message}")
@@ -100,7 +100,7 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
 
         // Camel Redis subscribe
         from("spring-redis://localhost:6379?command=SUBSCRIBE&channels=camelChannel&redisTemplate=#redisTemplate")
-                .routeId("Redis subscribe")
+                .routeId("Redis subscriber")
                 .process(enrichExchangeBody)
                 .bean(redisService, "getMessage(${body})")
                 .to("mock:result");
