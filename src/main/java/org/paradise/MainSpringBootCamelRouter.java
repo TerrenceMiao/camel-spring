@@ -86,12 +86,12 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
                     .bean(redisService, "handleException(${body})")
                     .to("mock:error")
                 .end()
-                // publish and subscribe
+                // for publish and subscribe
                 .setHeader(RedisConstants.CHANNEL, constant("camelChannel"))
                 .setHeader(RedisConstants.COMMAND, constant("PUBLISH"))
                 .setHeader(RedisConstants.MESSAGE, constant("This is hello message from Camel to Redis"))
                 .to("spring-redis://localhost:6379")
-                // key / value caching
+                // for key / value caching
                 .setHeader(RedisConstants.COMMAND, constant("HSET"))
                 .setHeader(RedisConstants.KEY, constant(Constants.REDIS_KEY))
                 .setHeader(RedisConstants.FIELD, constant(Constants.REDIS_FIELD))
