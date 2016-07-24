@@ -103,6 +103,9 @@ References
 - Travis CI AWS CodeDeploy, _https://docs.travis-ci.com/user/deployment/codedeploy/_
 - Create an Application with AWS CodeDeploy, _http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-application.html_
 - Install and config Redis on Mac OS X via Homebrew, _https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298_
+- Apache Redis Component, _http://camel.apache.org/redis.html_
+- Apache Camel meets Redis, _https://www.javacodegeeks.com/2013/03/apache-camel-meets-redis.html_
+- Redis Cheatsheet, _http://lzone.de/cheat-sheet/Redis_
 
 
 Copying
