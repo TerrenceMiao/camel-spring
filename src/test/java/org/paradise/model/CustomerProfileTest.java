@@ -30,7 +30,7 @@ public class CustomerProfileTest {
     @Test
     public void testCustomerProfileBuilder() throws Exception {
 
-        CustomerProfile customerProfile = new CustomerProfileBuilder()
+        CustomerProfile customerProfile = CustomerProfileBuilder.aCustomerProfile()
                 .withTitle(title)
                 .withMobile(mobile)
                 .withBpn(bpn)
