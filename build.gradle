@@ -104,6 +104,10 @@ dependencies {
 //	compile "org.apache.camel:camel-commands-spring-boot:${camelVersion}"
     // Camel Redis
     compile "org.apache.camel:camel-spring-redis:${camelVersion}"
+    // Camel Jetty for REST service
+    compile "org.apache.camel:camel-jetty:${camelVersion}"
+    compile "org.apache.camel:camel-jackson:${camelVersion}"
+    compile "org.apache.camel:camel-swagger-java:${camelVersion}"
 
     // FastXML Jackson
     compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
