@@ -16,7 +16,7 @@ public class HelloRouter extends FatJarRouter {
         // configure to use jetty on localhost with the given port and enable auto binding mode
         restConfiguration()
                 .component("jetty")
-                .host("0.0.0.0").port(9090)
+                .host("localhost").port(9090)
                 .bindingMode(RestBindingMode.json)
                 .dataFormatProperty("json.in.disableFeatures", "FAIL_ON_UNKNOWN_PROPERTIES, ADJUST_DATES_TO_CONTEXT_TIME_ZONE")
                 .dataFormatProperty("json.in.enableFeatures", "FAIL_ON_NUMBERS_FOR_ENUMS, USE_BIG_DECIMAL_FOR_FLOATS")
@@ -32,7 +32,7 @@ public class HelloRouter extends FatJarRouter {
                 .get("/hello")
                 .route()
                 .routeId("Hello REST")
-                .transform().constant("Say Hello REST!");
+                .transform().constant("Say hello to REST!");
     }
 
 }
