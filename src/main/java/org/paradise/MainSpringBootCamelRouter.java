@@ -55,8 +55,16 @@ public class MainSpringBootCamelRouter extends FatJarRouter {
         // Hello Camel example
 		from("timer:trigger?fixedRate=true&period=20000")
                 .routeId("Hello Camel")
+
+				.onException(Exception.class)
+					.process(exchangeWithError -> {})
+				.end()
+				// Or without exception handler
+				// .errorHandler(noErrorHandler())
+
 				// hard code break point
 				.process(exchange -> System.out.println())
+
 				// Add the following line before a bean, for example:
 				//
 				//   .to("file:///Users/terrence/Projects/pcc")
