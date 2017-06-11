@@ -1,0 +1,112 @@
+Run Camel / Spring Boot demo with Kubernetes
+============================================
+
+Prerequisites
+-------------
+- The corectl app, _https://github.com/TheNewNormal/corectl.app_
+- Kube Solo for OSX, _https://github.com/TheNewNormal/kube-solo-osx/releases_
+- Camel / Spring Book Docker image, _https://hub.docker.com/r/jtech/camel-spring/_
+
+Ready, Go
+---------
+Make sure Kube Solo is running. In Kubernetes Preset OS shell:
+
+[source.console]
+----
+𝜆 kubectl version
+Client Version: version.Info{Major:"1", Minor:"5", GitVersion:"v1.5.1", GitCommit:"82450d03cb057bab0950214ef122b67c83fb11df", GitTreeState:"clean", BuildDate:"2016-12-14T00:57:05Z", GoVersion:"go1.7.4", Compiler:"gc", Platform:"darwin/amd64"}
+Server Version: version.Info{Major:"1", Minor:"5", GitVersion:"v1.5.1", GitCommit:"82450d03cb057bab0950214ef122b67c83fb11df", GitTreeState:"clean", BuildDate:"2016-12-14T00:52:01Z", GoVersion:"go1.7.4", Compiler:"gc", Platform:"linux/amd64"}
+
+𝜆 kubectl run demo --image=jtech/camel-spring --port 8080
+deployment "demo" created
+
+𝜆 kubectl describe deployments
+Name:			demo
+Namespace:		default
+CreationTimestamp:	Sun, 11 Jun 2017 22:27:08 +1000
+Labels:			run=demo
+Selector:		run=demo
+Replicas:		1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:		RollingUpdate
+MinReadySeconds:	0
+RollingUpdateStrategy:	1 max unavailable, 1 max surge
+Conditions:
+  Type		Status	Reason
+  ----		------	------
+  Available 	True	MinimumReplicasAvailable
+OldReplicaSets:	<none>
+NewReplicaSet:	demo-1577565707 (1/1 replicas created)
+Events:
+  FirstSeen	LastSeen	Count	From				SubObjectPath	Type		Reason			Message
+  ---------	--------	-----	----				-------------	--------	------			-------
+  30s		30s		1	{deployment-controller }			Normal		ScalingReplicaSet	Scaled up replica set demo-1577565707 to 1
+
+𝜆 kubectl expose deployment demo --type="NodePort"
+service "demo" exposed
+
+𝜆 kubectl describe pods demo
+Name:		demo-1577565707-h6g77
+Namespace:	default
+Node:		k8solo-01/192.168.64.2
+Start Time:	Sun, 11 Jun 2017 22:27:08 +1000
+Labels:		pod-template-hash=1577565707
+		run=demo
+Status:		Running
+IP:		10.244.9.3
+Controllers:	ReplicaSet/demo-1577565707
+Containers:
+  demo:
+    Container ID:	docker://4f51b6c383f3744f6a08c30e17818d03d4f22ae3bdeae02496e567dd9277954d
+    Image:		jtech/camel-spring
+    Image ID:		docker-pullable://jtech/camel-spring@sha256:437a1e3c858d23a291887042241c20f507b46c33f21cabaefb509eda36778d4c
+    Port:		8080/TCP
+    State:		Running
+      Started:		Sun, 11 Jun 2017 22:27:13 +1000
+    Ready:		True
+    Restart Count:	0
+    Volume Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-xng4t (ro)
+    Environment Variables:	<none>
+Conditions:
+  Type		Status
+  Initialized 	True
+  Ready 	True
+  PodScheduled 	True
+Volumes:
+  default-token-xng4t:
+    Type:	Secret (a volume populated by a Secret)
+    SecretName:	default-token-xng4t
+QoS Class:	BestEffort
+Tolerations:	<none>
+Events:
+  FirstSeen	LastSeen	Count	From			SubObjectPath		Type		Reason		Message
+  ---------	--------	-----	----			-------------		--------	------		-------
+  3m		3m		1	{default-scheduler }				Normal		Scheduled	Successfully assigned demo-1577565707-h6g77 to k8solo-01
+  3m		3m		1	{kubelet k8solo-01}	spec.containers{demo}	Normal		Pulling		pulling image "jtech/camel-spring"
+  3m		3m		1	{kubelet k8solo-01}	spec.containers{demo}	Normal		Pulled		Successfully pulled image "jtech/camel-spring"
+  3m		3m		1	{kubelet k8solo-01}	spec.containers{demo}	Normal		Created		Created container with docker id 4f51b6c383f3; Security:[seccomp=unconfined]
+  3m		3m		1	{kubelet k8solo-01}	spec.containers{demo}	Normal		Started		Started container with docker id 4f51b6c383f3
+
+𝜆 kubectl describe services demo
+Name:			demo
+Namespace:		default
+Labels:			run=demo
+Selector:		run=demo
+Type:			NodePort
+IP:			10.100.29.153
+Port:			<unset>	8080/TCP
+NodePort:		<unset>	31928/TCP
+Endpoints:		10.244.9.3:8080
+Session Affinity:	None
+No events.
+----
+
+Now, go to Camel / Spring Boot demo page URL: _http://192.168.64.2:31928/hawtio/index.html_
+
+Kubernetes Dashboard
+--------------------
+Go to Kubernetes Dashboard URL: _http://192.168.64.2:8080/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard/_
+
+Reference
+---------
+- Run Kubernetes on a Mac with Kube Solo, _https://deis.com/blog/2016/run-kubernetes-on-a-mac-with-kube-solo/_
