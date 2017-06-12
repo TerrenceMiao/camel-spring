@@ -20,7 +20,7 @@ kubeconfig entry generated for cluster-containers.
 Starting to serve on 127.0.0.1:8001
 ----
 
-Go to URL: _http://localhost:8001/ui_
+Go to Kubernetes Dashboard on localhost: _http://localhost:8001/ui_
 
 Kubernetes Admin from Dashboard
 
@@ -271,11 +271,7 @@ Events:
   12m		4m		5	service-controller			Normal		UpdatedLoadBalancer	Updated load balancer with new hosts
 ----
 
-Now, go to Camel / Spring Boot demo page URL: _http://192.168.64.2:31928/hawtio/index.html_
-
-Kubernetes Dashboard
---------------------
-Go to Kubernetes Dashboard URL: _http://192.168.64.2:8080/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard/_
+Now, go to Camel / Spring Boot demo page URL: _http://35.186.159.19:8080/hawtio/index.html_
 
 Clean up
 --------
