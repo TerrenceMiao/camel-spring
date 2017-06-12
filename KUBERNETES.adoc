@@ -45,6 +45,8 @@ Events:
 service "demo" exposed
 ----
 
+Kubernetes Workloads from Dashboard
+
 image::Kubernetes{sp}Workloads.png[Kubernetes Workloads]
 
 [source.console]
@@ -92,6 +94,8 @@ Events:
   3m		3m		1	{kubelet k8solo-01}	spec.containers{demo}	Normal		Created		Created container with docker id 4f51b6c383f3; Security:[seccomp=unconfined]
   3m		3m		1	{kubelet k8solo-01}	spec.containers{demo}	Normal		Started		Started container with docker id 4f51b6c383f3
 ----
+
+Kubernetes Services and discovery from Dashboard
 
 image::Kubernetes{sp}Services.png[Kubernetes Services]
 
