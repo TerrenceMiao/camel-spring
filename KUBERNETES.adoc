@@ -43,7 +43,12 @@ Events:
 
 𝜆 kubectl expose deployment demo --type="NodePort"
 service "demo" exposed
+----
 
+image::Kubernetes{sp}Workloads.png[Kubernetes Workloads]
+
+[source.console]
+----
 𝜆 kubectl describe pods demo
 Name:		demo-1577565707-h6g77
 Namespace:	default
@@ -86,7 +91,12 @@ Events:
   3m		3m		1	{kubelet k8solo-01}	spec.containers{demo}	Normal		Pulled		Successfully pulled image "jtech/camel-spring"
   3m		3m		1	{kubelet k8solo-01}	spec.containers{demo}	Normal		Created		Created container with docker id 4f51b6c383f3; Security:[seccomp=unconfined]
   3m		3m		1	{kubelet k8solo-01}	spec.containers{demo}	Normal		Started		Started container with docker id 4f51b6c383f3
+----
 
+image::Kubernetes{sp}Services.png[Kubernetes Services]
+
+[source.console]
+----
 𝜆 kubectl describe services demo
 Name:			demo
 Namespace:		default
