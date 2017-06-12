@@ -242,7 +242,7 @@ service "demo-service" exposed
 
 Kubernetes Services and discovery from Dashboard
 
-image::Kubernetes{sp}Google{sp}Cloud{sp}Services{sp}and{discovery}.png[Kubernetes Services and discovery]
+image::Kubernetes{sp}Google{sp}Cloud{sp}Services{sp}and{sp}discovery.png[Kubernetes Services and discovery]
 
 [source.console]
 ----
