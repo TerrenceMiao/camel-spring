@@ -1,5 +1,5 @@
-Run Camel / Spring Boot demo with Kubernetes localhost
-======================================================
+Run Camel / Spring Boot demo with Kubernetes Solo
+=================================================
 
 Prerequisites
 -------------
