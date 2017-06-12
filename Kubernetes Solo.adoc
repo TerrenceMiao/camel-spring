@@ -1,5 +1,5 @@
-Run Camel / Spring Boot demo with Kubernetes
-============================================
+Run Camel / Spring Boot demo with Kubernetes localhost
+======================================================
 
 Prerequisites
 -------------
@@ -47,7 +47,7 @@ service "demo" exposed
 
 Kubernetes Workloads from Dashboard
 
-image::Kubernetes{sp}Workloads.png[Kubernetes Workloads]
+image::Kubernetes{sp}Solo{sp}Workloads.png[Kubernetes Solo Workloads]
 
 [source.console]
 ----
@@ -97,7 +97,7 @@ Events:
 
 Kubernetes Services and discovery from Dashboard
 
-image::Kubernetes{sp}Services.png[Kubernetes Services]
+image::Kubernetes{sp}Solo{sp}Services.png[Kubernetes Solo Services]
 
 [source.console]
 ----
@@ -124,3 +124,4 @@ Go to Kubernetes Dashboard URL: _http://192.168.64.2:8080/api/v1/proxy/namespace
 Reference
 ---------
 - Run Kubernetes on a Mac with Kube Solo, _https://deis.com/blog/2016/run-kubernetes-on-a-mac-with-kube-solo/_
+- Connection refused on exposed port, _https://github.com/TheNewNormal/kube-solo-osx/issues/52_
