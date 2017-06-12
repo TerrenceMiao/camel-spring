@@ -1,0 +1,300 @@
+Run Camel / Spring Boot demo with Kubernetes Google Cloud
+=========================================================
+
+Prerequisites
+-------------
+- Google Cloud Tools, _https://cloud.google.com/sdk/docs/_
+- Camel / Spring Book Docker image, _https://hub.docker.com/r/jtech/camel-spring/_
+
+Kubernets Dashboard Google Cloud
+--------------------------------
+Connect Kubernets Dashboard from localhost:
+
+[source.console]
+----
+𝜆 google-cloud-sdk/bin/gcloud container clusters get-credentials cluster-containers --zone asia-southeast1-a --project j-tech
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for cluster-containers.
+
+𝜆 google-cloud-sdk/bin/kubectl proxy
+Starting to serve on 127.0.0.1:8001
+----
+
+Go to URL: _http://localhost:8001/ui_
+
+Kubernetes Admin from Dashboard
+
+image::Kubernetes{sp}Google{sp}Cloud{sp}Admin.png[Kubernetes Admin]
+
+Kubernetes Nodes from Dashboard
+
+image::Kubernetes{sp}Google{sp}Cloud{sp}Nodes.png[Kubernetes Nodes]
+
+Deploy Docker image
+-------------------
+After Google Cloud Tools installed, and configuration Google Container Engine, open a terminal and run:
+
+[source.console]
+----
+𝜆 google-cloud-sdk/bin/kubectl version
+Client Version: version.Info{Major:"1", Minor:"6", GitVersion:"v1.6.4", GitCommit:"d6f433224538d4f9ca2f7ae19b252e6fcb66a3ae", GitTreeState:"clean", BuildDate:"2017-05-19T18:44:27Z", GoVersion:"go1.7.5", Compiler:"gc", Platform:"darwin/amd64"}
+Server Version: version.Info{Major:"1", Minor:"6", GitVersion:"v1.6.4", GitCommit:"d6f433224538d4f9ca2f7ae19b252e6fcb66a3ae", GitTreeState:"clean", BuildDate:"2017-05-19T18:33:17Z", GoVersion:"go1.7.5", Compiler:"gc", Platform:"linux/amd64"}
+
+𝜆 google-cloud-sdk/bin/kubectl run demo --replicas=2 --labels="run=camel-spring-boot-example" --image=jtech/camel-spring  --port=8080
+deployment "demo" created
+
+𝜆 google-cloud-sdk/bin/kubectl describe deployments demo
+Name:			demo
+Namespace:		default
+CreationTimestamp:	Tue, 13 Jun 2017 00:37:08 +1000
+Labels:			run=camel-spring-boot-example
+Annotations:		deployment.kubernetes.io/revision=1
+Selector:		run=camel-spring-boot-example
+Replicas:		2 desired | 2 updated | 2 total | 1 available | 1 unavailable
+StrategyType:		RollingUpdate
+MinReadySeconds:	0
+RollingUpdateStrategy:	1 max unavailable, 1 max surge
+Pod Template:
+  Labels:	run=camel-spring-boot-example
+  Containers:
+   demo:
+    Image:		jtech/camel-spring
+    Port:		8080/TCP
+    Environment:	<none>
+    Mounts:		<none>
+  Volumes:		<none>
+Conditions:
+  Type		Status	Reason
+  ----		------	------
+  Available 	True	MinimumReplicasAvailable
+OldReplicaSets:	<none>
+NewReplicaSet:	demo-1621693667 (2/2 replicas created)
+Events:
+  FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+  ---------	--------	-----	----			-------------	--------	------			-------
+  4m		4m		1	deployment-controller			Normal		ScalingReplicaSet	Scaled up replica set demo-1621693667 to 2
+
+𝜆 google-cloud-sdk/bin/kubectl describe pods demo
+Name:		demo-1621693667-0hrv5
+Namespace:	default
+Node:		gke-cluster-containers-default-pool-a03894e0-7x9l/10.148.0.4
+Start Time:	Tue, 13 Jun 2017 00:37:08 +1000
+Labels:		pod-template-hash=1621693667
+		run=camel-spring-boot-example
+Annotations:	kubernetes.io/created-by={"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"demo-1621693667","uid":"9cac7f1d-4f7c-11e7-9ef9-42010a940079","a...
+		kubernetes.io/limit-ranger=LimitRanger plugin set: cpu request for container demo
+Status:		Running
+IP:		10.32.1.6
+Controllers:	ReplicaSet/demo-1621693667
+Containers:
+  demo:
+    Container ID:	docker://c556fe176a3f6242db5225104e315e2fa9e28a002a808325b0e7ec800205fb2c
+    Image:		jtech/camel-spring
+    Image ID:		docker://sha256:74c5b0c195a07572bf9dd26cefee15dc0a792d98b9577f9a5dc526771378cb71
+    Port:		8080/TCP
+    State:		Running
+      Started:		Tue, 13 Jun 2017 00:37:14 +1000
+    Ready:		True
+    Restart Count:	0
+    Requests:
+      cpu:		100m
+    Environment:	<none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-cqgkj (ro)
+Conditions:
+  Type		Status
+  Initialized 	True
+  Ready 	True
+  PodScheduled 	True
+Volumes:
+  default-token-cqgkj:
+    Type:	Secret (a volume populated by a Secret)
+    SecretName:	default-token-cqgkj
+    Optional:	false
+QoS Class:	Burstable
+Node-Selectors:	<none>
+Tolerations:	node.alpha.kubernetes.io/notReady=:Exists:NoExecute for 300s
+		node.alpha.kubernetes.io/unreachable=:Exists:NoExecute for 300s
+Events:
+  FirstSeen	LastSeen	Count	From								SubObjectPath		Type		Reason		Message
+  ---------	--------	-----	----								-------------		--------	------		-------
+  11m		11m		1	default-scheduler									Normal		Scheduled	Successfully assigned demo-1621693667-0hrv5 to gke-cluster-containers-default-pool-a03894e0-7x9l
+  11m		11m		1	kubelet, gke-cluster-containers-default-pool-a03894e0-7x9l	spec.containers{demo}	Normal		Pulling		pulling image "jtech/camel-spring"
+  11m		11m		1	kubelet, gke-cluster-containers-default-pool-a03894e0-7x9l	spec.containers{demo}	Normal		Pulled		Successfully pulled image "jtech/camel-spring"
+  11m		11m		1	kubelet, gke-cluster-containers-default-pool-a03894e0-7x9l	spec.containers{demo}	Normal		Created		Created container with id c556fe176a3f6242db5225104e315e2fa9e28a002a808325b0e7ec800205fb2c
+  11m		11m		1	kubelet, gke-cluster-containers-default-pool-a03894e0-7x9l	spec.containers{demo}	Normal		Started		Started container with id c556fe176a3f6242db5225104e315e2fa9e28a002a808325b0e7ec800205fb2c
+  1m		1m		2	kubelet, gke-cluster-containers-default-pool-a03894e0-7x9l				Warning		FailedSync	Error syncing pod, skipping: network is not ready: [runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: Kubenet does not have netConfig. This is most likely due to lack of PodCIDR]
+  47s		46s		2	kubelet, gke-cluster-containers-default-pool-a03894e0-7x9l				Warning		FailedSync	Error syncing pod, skipping: network is not ready: [runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: Kubenet does not have netConfig. This is most likely due to lack of PodCIDR]
+
+Name:		demo-1621693667-6cpjx
+Namespace:	default
+Node:		gke-cluster-containers-default-pool-a03894e0-7x9l/10.148.0.4
+Start Time:	Tue, 13 Jun 2017 00:45:15 +1000
+Labels:		pod-template-hash=1621693667
+		run=camel-spring-boot-example
+Annotations:	kubernetes.io/created-by={"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"demo-1621693667","uid":"9cac7f1d-4f7c-11e7-9ef9-42010a940079","a...
+		kubernetes.io/limit-ranger=LimitRanger plugin set: cpu request for container demo
+Status:		Pending
+IP:		10.32.1.9
+Controllers:	ReplicaSet/demo-1621693667
+Containers:
+  demo:
+    Container ID:
+    Image:		jtech/camel-spring
+    Image ID:
+    Port:		8080/TCP
+    State:		Waiting
+      Reason:		ContainerCreating
+    Ready:		False
+    Restart Count:	0
+    Requests:
+      cpu:		100m
+    Environment:	<none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-cqgkj (ro)
+Conditions:
+  Type		Status
+  Initialized 	True
+  Ready 	False
+  PodScheduled 	True
+Volumes:
+  default-token-cqgkj:
+    Type:	Secret (a volume populated by a Secret)
+    SecretName:	default-token-cqgkj
+    Optional:	false
+QoS Class:	Burstable
+Node-Selectors:	<none>
+Tolerations:	node.alpha.kubernetes.io/notReady=:Exists:NoExecute for 300s
+		node.alpha.kubernetes.io/unreachable=:Exists:NoExecute for 300s
+Events:
+  FirstSeen	LastSeen	Count	From								SubObjectPath		Type		Reason		Message
+  ---------	--------	-----	----								-------------		--------	------		-------
+  3m		3m		1	default-scheduler									Normal		Scheduled	Successfully assigned demo-1621693667-6cpjx to gke-cluster-containers-default-pool-a03894e0-7x9l
+  3m		3m		1	kubelet, gke-cluster-containers-default-pool-a03894e0-7x9l	spec.containers{demo}	Normal		Pulling		pulling image "jtech/camel-spring"
+  1m		1m		2	kubelet, gke-cluster-containers-default-pool-a03894e0-7x9l				Warning		FailedSync	Error syncing pod, skipping: network is not ready: [runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: Kubenet does not have netConfig. This is most likely due to lack of PodCIDR]
+  48s		47s		2	kubelet, gke-cluster-containers-default-pool-a03894e0-7x9l				Warning		FailedSync	Error syncing pod, skipping: network is not ready: [runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: Kubenet does not have netConfig. This is most likely due to lack of PodCIDR]
+
+Name:				demo-1621693667-p2f4k
+Namespace:			default
+Node:				gke-cluster-containers-default-pool-a03894e0-9thq/10.148.0.2
+Start Time:			Tue, 13 Jun 2017 00:37:08 +1000
+Labels:				pod-template-hash=1621693667
+				run=camel-spring-boot-example
+Annotations:			kubernetes.io/created-by={"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"demo-1621693667","uid":"9cac7f1d-4f7c-11e7-9ef9-42010a940079","a...
+				kubernetes.io/limit-ranger=LimitRanger plugin set: cpu request for container demo
+Status:				Terminating (expires Tue, 13 Jun 2017 00:45:45 +1000)
+Termination Grace Period:	30s
+Reason:				NodeLost
+Message:			Node gke-cluster-containers-default-pool-a03894e0-9thq which was running pod demo-1621693667-p2f4k is unresponsive
+IP:				10.32.2.11
+Controllers:			ReplicaSet/demo-1621693667
+Containers:
+  demo:
+    Container ID:	docker://482bba743a2ed34e6dac89c3febeff0a005716c438dfd06e05eb9c75ba552a63
+    Image:		jtech/camel-spring
+    Image ID:		docker://sha256:74c5b0c195a07572bf9dd26cefee15dc0a792d98b9577f9a5dc526771378cb71
+    Port:		8080/TCP
+    State:		Running
+      Started:		Tue, 13 Jun 2017 00:37:24 +1000
+    Ready:		True
+    Restart Count:	0
+    Requests:
+      cpu:		100m
+    Environment:	<none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-cqgkj (ro)
+Conditions:
+  Type		Status
+  Initialized 	True
+  Ready 	False
+  PodScheduled 	True
+Volumes:
+  default-token-cqgkj:
+    Type:	Secret (a volume populated by a Secret)
+    SecretName:	default-token-cqgkj
+    Optional:	false
+QoS Class:	Burstable
+Node-Selectors:	<none>
+Tolerations:	node.alpha.kubernetes.io/notReady=:Exists:NoExecute for 300s
+		node.alpha.kubernetes.io/unreachable=:Exists:NoExecute for 300s
+Events:
+  FirstSeen	LastSeen	Count	From								SubObjectPath		Type		Reason			Message
+  ---------	--------	-----	----								-------------		--------	------			-------
+  11m		11m		1	default-scheduler									Normal		Scheduled		Successfully assigned demo-1621693667-p2f4k to gke-cluster-containers-default-pool-a03894e0-9thq
+  11m		11m		1	kubelet, gke-cluster-containers-default-pool-a03894e0-9thq	spec.containers{demo}	Normal		Pulling			pulling image "jtech/camel-spring"
+  11m		11m		1	kubelet, gke-cluster-containers-default-pool-a03894e0-9thq	spec.containers{demo}	Normal		Pulled			Successfully pulled image "jtech/camel-spring"
+  11m		11m		1	kubelet, gke-cluster-containers-default-pool-a03894e0-9thq	spec.containers{demo}	Normal		Created			Created container with id 482bba743a2ed34e6dac89c3febeff0a005716c438dfd06e05eb9c75ba552a63
+  11m		11m		1	kubelet, gke-cluster-containers-default-pool-a03894e0-9thq	spec.containers{demo}	Normal		Started			Started container with id 482bba743a2ed34e6dac89c3febeff0a005716c438dfd06e05eb9c75ba552a63
+  3m		3m		1	controllermanager									Normal		NodeControllerEviction	Marking for deletion Pod demo-1621693667-p2f4k from Node gke-cluster-containers-default-pool-a03894e0-9thq
+----
+
+Kubernetes Workloads from Dashboard
+
+image::Kubernetes{sp}Google{sp}Cloud{sp}Workloads.png[Kubernetes Workloads]
+
+Create a Service object that exposes the deployment:
+
+[source.console]
+----
+𝜆 google-cloud-sdk/bin/kubectl expose deployment demo --type=LoadBalancer --name=demo-service
+service "demo-service" exposed
+----
+
+Kubernetes Services and discovery from Dashboard
+
+image::Kubernetes{sp}Google{sp}Cloud{sp}Services{sp}and{discovery}.png[Kubernetes Services and discovery]
+
+[source.console]
+----
+𝜆 google-cloud-sdk/bin/kubectl get services demo-service
+NAME           CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE
+demo-service   10.35.244.151   35.186.159.19   8080:32286/TCP   15m
+
+𝜆 google-cloud-sdk/bin/kubectl describe services demo-service
+Name:			demo-service
+Namespace:		default
+Labels:			run=camel-spring-boot-example
+Annotations:		<none>
+Selector:		run=camel-spring-boot-example
+Type:			LoadBalancer
+IP:			10.35.244.151
+LoadBalancer Ingress:	35.186.159.19
+Port:			<unset>	8080/TCP
+NodePort:		<unset>	32286/TCP
+Endpoints:		10.32.0.7:8080
+Session Affinity:	None
+Events:
+  FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+  ---------	--------	-----	----			-------------	--------	------			-------
+  16m		16m		1	service-controller			Normal		CreatingLoadBalancer	Creating load balancer
+  16m		16m		1	service-controller			Normal		CreatedLoadBalancer	Created load balancer
+  12m		4m		5	service-controller			Normal		UpdatedLoadBalancer	Updated load balancer with new hosts
+----
+
+Now, go to Camel / Spring Boot demo page URL: _http://192.168.64.2:31928/hawtio/index.html_
+
+Kubernetes Dashboard
+--------------------
+Go to Kubernetes Dashboard URL: _http://192.168.64.2:8080/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard/_
+
+Clean up
+--------
+To delete the Service, enter this command:
+
+[source.console]
+----
+𝜆 google-cloud-sdk/bin/kubectl delete services demo-service
+service "demo-service" deleted
+----
+
+To delete the Deployment, the ReplicaSet, and the Pods that are running the Demo application, enter this command:
+
+[source.console]
+----
+𝜆 google-cloud-sdk/bin/kubectl delete deployment demo
+deployment "demo" deleted
+----
+
+Reference
+---------
+- Exposing an External IP Address to Access an Application in a Cluster, _https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/_ 
