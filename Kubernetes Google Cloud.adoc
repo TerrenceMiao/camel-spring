@@ -294,3 +294,5 @@ deployment "demo" deleted
 Reference
 ---------
 - Exposing an External IP Address to Access an Application in a Cluster, _https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/_ 
+- Google Cloud Console, _https://console.cloud.google.com_
+- Google Cloud Platform Free Tier, _https://cloud.google.com/free/_
