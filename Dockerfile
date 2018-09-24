@@ -4,6 +4,8 @@ FROM jtech/oracle-jdk:latest
 
 MAINTAINER Terrence Miao <TerrenceMiao@users.noreply.github.com>
 
+RUN ./gradlew clean build
+
 ADD build/libs/camel-spring-1.0-SNAPSHOT.jar camel-spring.jar
 
 EXPOSE 8080
