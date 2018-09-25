@@ -1,10 +1,10 @@
 ## Camel / Spring Boot demo in Docker
 
-FROM jtech/oracle-jdk:latest
+FROM jtech/oracle-jdk
 
 MAINTAINER Terrence Miao <TerrenceMiao@users.noreply.github.com>
 
-ADD build/libs/camel-spring-1.0-SNAPSHOT.jar camel-spring.jar
+ADD libs/camel-spring-1.0-SNAPSHOT.jar camel-spring.jar
 
 EXPOSE 8080
 
